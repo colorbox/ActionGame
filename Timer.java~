@@ -1,0 +1,7 @@
+public class Timer{
+    //時間を保持
+    private int Time=0;
+    public Timer(int time){
+	this.time=time;
+    }
+}

@@ -1,0 +1,11 @@
+public class Character extends Material{
+
+    //物体管理者、弾の管理
+    public MaterialAdministrator BalletsAdmin;
+
+    //コンストラクタ
+    public Character(double x,double y,double rad,double force,MaterialAdministrator ma){
+	super(x,y,rad,force,ma);
+	BalletsAdmin=new MaterialAdministrator();
+    }
+}

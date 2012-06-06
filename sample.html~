@@ -1,0 +1,10 @@
+<html>
+<head>
+<title>Welcome to Java World</title>
+</head>
+<body>
+<applet code="main.class" width=320 height=320>
+</applet>
+</body>
+</html>
+

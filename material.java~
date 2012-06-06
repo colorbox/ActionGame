@@ -1,0 +1,47 @@
+import java.lang.Math;
+import java.awt.*;
+import java.applet.Applet;
+
+//ゲームにおける物体のスーパークラス
+public class material{
+    private static double rad1 = Math.PI/180;
+    //物体の角度
+    private double rad;
+    //物体にかかる力の大きさ
+    private double force;
+    //角度変更double
+    public void radConvert(double conv){
+	rad = (rad + conv)%(2*Math.PI);
+	System.out.println(rad/rad1);
+    }
+    //角度変更int
+    public void radConvert(int conv){
+	rad = (rad + conv * rad1)%(2*Math.PI);
+	System.out.println("rad:"+rad/rad1);
+    }
+    //力変更
+    public void forceConvert(double conv){
+	force += conv;
+	System.out.println("force:"+force);
+    }
+    public void print(){
+	System.out.println("r:" + rad/rad1 + "\nf:" + force);
+    }
+    //矢印描写
+    public void pointing(Graphics g){
+	int x=200+(int)(force * Math.cos(rad));
+	int y=200+(int)(force * Math.sin(rad));
+	g.drawLine( 200, 200,x ,y  ) ;	
+	g.fillOval(x-2,y-2,4,4);
+
+    }
+    /*
+    public static void main(String[] args){
+	material test = new material();
+	test.radConvert(137.1*rad1);
+	test.radConvert(13);
+	test.radConvert(137.1*rad1);
+	test.print();
+	}
+    */
+}
