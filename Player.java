@@ -14,9 +14,11 @@ public class Player extends Character{
     public Pointer getCannon(){return Cannon;}
 
     //コンストラクタ
-    public Player(double x,double y,double rad,double force,MaterialAdministrator ma){
-	super(x,y,rad,force,ma,false);
+    public Player(double x,double y,double rad,double force/*,MaterialAdministrator ma*/){
+	//super(x,y,rad,force,ma,false);
+	super(x,y,rad,force,false);
 	Cannon=new Pointer(rad,force);
+	//addHitter(new Hitter(16,8,0,0,5));
     }
 
     //API for Behavior
@@ -47,8 +49,8 @@ public class Player extends Character{
     public void attack(){}
 
     //弾発射
-    public void launchMaterial(){
-	new Ballet(getX(),getY(),Cannon.getRad(),Cannon.getForce() ,ma);
+    public void launchMaterial(MaterialAdministrator ma){
+	ma.add(new Ballet(getX(),getY(),Cannon.getRad(),Cannon.getForce() ,false));
     }
 
     //移動
@@ -66,6 +68,7 @@ public class Player extends Character{
 
 	//センサの描写
 	Sensor.draw(g);
+	materialDraw(g);
 	/*
 	g.setColor((new Color(200, 200,200)));
 	g.drawLine((int)getX(),(int)getY(),(int)getX(),(int)getY());

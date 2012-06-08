@@ -4,12 +4,12 @@ import java.awt.*;
 
 //当たり判定に関するクラス、「当たり判定クラスを引数にとり当たってるかの判定」「当たり判定位置や半径の変更」「自在に消滅」などをしたりする
 public class Hitter{
-    //相対座標
+    //基準座標からの相対座標
     private int relativeX=0,relativeY=0;
-    //絶対座標
-    private int absolX=0,absolY=0;
     //基準座標
     private int x=0,y=0;
+    //絶対座標(基準座標+相対座標)
+    private int absolX=0,absolY=0;
     //半径
     private int radius=0;
     //消滅フラグ,モノによっちゃ、当たり判定を複数持つので、消滅フラグで管理できるようにする
@@ -43,8 +43,8 @@ public class Hitter{
 
     //基準座標と相対座標による絶対座標の更新
     private void coordinateRenew(int x,int y){
-	setAbsolX( x + getAbsolX() );
-	setAbsolY( y + getAbsolY() );
+	setAbsolX( x + getRelativeX() );
+	setAbsolY( y + getRelativeY() );
     }
 
 
@@ -54,7 +54,8 @@ public class Hitter{
 	setY(y);
 	//絶対座標の更新
 	coordinateRenew(x,y);
-	//System.out.println(relativeX+","+relativeY+","+getX()+","+getY()+","+radius);
+
+	System.out.println(relativeX+","+relativeY+","+getX()+","+getY()+","+getAbsolX()+","+getAbsolY()+","+radius);
     }
 
     //値をまとめて変更

@@ -12,9 +12,7 @@ public class ManyHitters{
     public void setY(int y){this.y=y;}
 
     //コンストラクタ
-    public ManyHitters(Hitter hitter){
-	add(hitter);
-    }
+    public ManyHitters(){}
 
     //当たり範囲を追加
     public void add(Hitter hitter){

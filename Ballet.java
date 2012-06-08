@@ -7,9 +7,8 @@ import java.awt.event.*;
 public class Ballet extends Material{
 
     //コンストラクタ
-    public Ballet(double x,double y,double rad,double force,MaterialAdministrator ma ){
-	super(x,y,rad,force,ma);
-	addHitter(new Hitter(16,16,0,0,3));
+    public Ballet(double x,double y,double rad,double force,boolean isEnemy){
+	super(x,y,rad,force,isEnemy);
     }
     //Balletは弾、弾なので、飛んで行ったり当たり判定のための範囲が設定されてる、
     //でも壁に当たると消えたりする処理が必要。

@@ -14,7 +14,7 @@ public class Behavior{
     }
 
     //プレイヤーの振る舞い、非移動時
-    public void playerBehaviorNotMove(Controller Controller,Player Player){
+    public void playerBehaviorNotMove(Controller Controller,Player Player,MaterialAdministrator ma){
 	//スティック操作
 	int stick = Controller.getStick();
 	if(stick == 6){Player.getCannon().radConvert(+5);}
@@ -23,7 +23,7 @@ public class Behavior{
 	if(stick == 2){Player.getCannon().forceConvert(-3.0);}
 	//ボタン操作
 	if(Controller.getZPress()){
-	    Player.launchMaterial();
+	    Player.launchMaterial(ma);
 	}
 	if(Controller.getXPress()){
 	    changeMode();
@@ -64,11 +64,11 @@ public class Behavior{
     }
 
     //プレイヤーの振る舞い、分岐
-    public void playerBehavior(Controller Controller,Player Player){
+    public void playerBehavior(Controller Controller,Player Player,MaterialAdministrator ma){
 	if(getMoveMode()){
 	    playerBehaviorMove(Controller,Player);
 	}else{
-	    playerBehaviorNotMove(Controller,Player);
+	    playerBehaviorNotMove(Controller,Player,ma);
 	}
     }
 

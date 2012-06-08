@@ -18,7 +18,8 @@
 //120602:MaterialAdministratorの実装をしよう、現行のPlayerは一旦無視、物体管理者に物体を追加してきっちり動くかを確かめるノダー、
 //120602:相対範囲を導入したらHitterのあたり範囲がよくわからんくなった。そこらへんをきっちり整理しろ
 //120605:物体管理者に全ての物体の管理を一任させた。キャラとそいつが生成する弾は同じ扱い、プレイヤーか、敵かは、登録時にタグか何かをつけて判別するようにする。
-
+//120606:当たり判定が動いてないくせェー、色々チェックしろ、隅から隅まで全部だ！MAの衝突判定あたりがおかしいくさい。MAの適切なリストに物体が振り分けられてないバグは直した。
+//120608:当たり判定に関するバグ取りは終了。新しい関数作ったらそのTestもしようね。Materilaに管理者を保持させるのはやめにした。逐一管理者のaddを呼び出すほうがいいだろうという判断。次はダメージとかそういうのやろう。ダメージってことは敵がいるよね、それやろう。
 import java.awt.*;
 import java.applet.Applet;
 import java.util.Random;
@@ -27,14 +28,13 @@ import java.awt.event.*;
 public class main extends Applet implements Runnable,KeyListener{
     //テスト用物体管理者
     MaterialAdministrator ma = new MaterialAdministrator();
-
     //オフスクリーンバッファのグラフィックコンテキスト
     Graphics gBuf;
     Image imgBuf;
     Thread thread = null;
     int w, h;
     //自機
-    Player Player = new Player(200.0,200.0,0.0,0.0,ma);
+    Player Player = new Player(200.0,200.0,0.0,0.0);
     //コントローラー
     Controller Controller =new Controller();
     //振る舞い
@@ -65,7 +65,7 @@ public class main extends Applet implements Runnable,KeyListener{
 	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,},
 	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,},
 	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,1,},
-	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,},
+	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,},
 	{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,},
 	{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,},
     };
@@ -83,9 +83,11 @@ public class main extends Applet implements Runnable,KeyListener{
 	//キーボードリスナー登録
 	addKeyListener(this);
 	//物体管理者の物体追加
-	new Material(100,100,0.0,0.0,ma);
-	new Material(200,50,0.0,0.0,ma);
-	new Ballet(300,50,0.0,0.0,ma);
+	ma.add(new Material(100,100,0.0,0.0,true));
+	//new Material(200,50,0.0,0.0,ma,true);
+	//new Ballet(300,50,0.0,0.0,ma,true);
+	//Player追加
+	ma.add(Player);
     }
 
     //背景イメージ描画メソッド
@@ -137,11 +139,12 @@ public class main extends Applet implements Runnable,KeyListener{
 	gBack.dispose();
 
 	while(thread != null){
+
 	    //背景画像をバッファに描画
 	    gBuf.drawImage(imgBack, 0, 0, this);
 
 	    //自機の操作
-	    Behavior.playerBehavior(Controller,Player);
+	    Behavior.playerBehavior(Controller,Player,ma);
 
 	    //物体管理者の物体管理
 	    ma.allOperation(Stage,gBuf);
@@ -151,6 +154,7 @@ public class main extends Applet implements Runnable,KeyListener{
 
 	    //コントローラーの値を全てリセット
 	    Controller.buttonReset();
+
 	    try{
 		//0.016秒間(約1フレーム)スリープ。これを忘れるとハングアップする
 		Thread.sleep(17);

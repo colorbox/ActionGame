@@ -1,15 +1,8 @@
 public class Character extends Material{
-    //敵フラグ
-    private boolean isEnemy;
-    //getter/setter
-    public boolean getIsEnemy(){return isEnemy;}
-
-    public void setIsEnemy(boolean isEnemy){this.isEnemy=isEnemy;}
 
     //コンストラクタ
-    public Character(double x,double y,double rad,double force,MaterialAdministrator ma,boolean isEnemy){
-	super(x,y,rad,force,ma);
-	setIsEnemy(isEnemy);
+    public Character(double x,double y,double rad,double force,boolean isEnemy){
+	super(x,y,rad,force,isEnemy);
     }
 
     //API群

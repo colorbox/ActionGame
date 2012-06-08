@@ -5,8 +5,8 @@ import java.applet.Applet;
 
 //ゲームにおける物体のスーパークラス
 public class Material{
-    //自分の管理者を保持しておく。
-    public MaterialAdministrator ma;
+    //敵フラグ
+    private boolean isEnemy;
     //重力
     public Pointer Gravity = new Pointer(Math.PI/2,0.5);
     //1度の角度
@@ -18,7 +18,7 @@ public class Material{
     //接地接壁接天井検知用のセンサクラス
     protected Sensor Sensor=new Sensor(0,0);
     //当たり範囲群
-    private ManyHitters manyhitters = new ManyHitters(new Hitter(8,8,0,0,5));
+    private ManyHitters manyhitters = new ManyHitters();
     //消滅フラグ
     private boolean Vanish=false;
 
@@ -29,6 +29,8 @@ public class Material{
     public double getY(){return y;}
     public boolean getLanding(){return Sensor.getLanding();}
     public boolean getVanish(){return Vanish;}
+    public boolean getIsEnemy(){return isEnemy;}
+    public ManyHitters getManyHitters(){return manyhitters;}
 
     //setter
     public void setForce(double ForcePower){this.Vector.setForce(ForcePower);}
@@ -37,14 +39,15 @@ public class Material{
     public void setX(double x){this.x=x;}
     public void setY(double y){this.y=y;}
     public void setVanish(boolean Vanish){this.Vanish=Vanish;}
+    public void setIsEnemy(boolean isEnemy){this.isEnemy=isEnemy;}
 
     //コンストラクタ
-    public Material(double x,double y,double rad,double force,MaterialAdministrator ma){
-	this.ma=ma;
+    public Material(double x,double y,double rad,double force,boolean isEnemy){
 	this.x=x;
 	this.y=y;
 	this.Vector=new Pointer(rad,force);
-	this.ma.add(this);
+	setIsEnemy(isEnemy);
+	manyhitters.add(new Hitter(8,8,0,0,5));
     }
 
     //あたり範囲を追加
@@ -54,8 +57,8 @@ public class Material{
 
     //接壁処理左
     public void wallingLeftOperation(int[][] Stage){
-	//縦方向のベクトルを補正
-	Vector.verticleExtractRight();
+	//左方向のベクトルを除去
+	//Vector.verticleExtractRight();
 	//X座標を補正
 	setX( (int)getX() + 15 - (int)(getX()-1)%16 );
     }
@@ -64,7 +67,7 @@ public class Material{
     public void wallingRightOperation(int[][] Stage){
 	//左右どちらかのセンサがオブジェクト内部に合ったら接壁状態
 	//ベクトルの右方向成分を除去
-	Vector.verticleExtractLeft();
+	//Vector.verticleExtractLeft();
 	//座標を補正
 	setX( (int)getX() - (int)(getX())%16 );
     }
@@ -116,8 +119,10 @@ public class Material{
 	//物理ベクトルに基づく移動
 	setX(getX()+getForce() * Math.cos(getRad()));
 	setY(getY()+getForce() * Math.sin(getRad()));
-	//センサの値をセット
+
+	//センサの値を更新
 	Sensor.setParam((int)getX(),(int)getY());
+
 	//当たり範囲の座標を更新
 	manyhitters.setCoordinate((int)getX(),(int)getY());
     }
@@ -149,9 +154,13 @@ public class Material{
 	}
     }
 
+
+    public void materialDraw(Graphics g){
+	manyhitters.draw(g);
+    }
     //描写
     public void draw(Graphics g){
 	g.fillOval((int)x,(int)y,15,15);
-	manyhitters.draw(g);
+	materialDraw(g);
     }
 }
