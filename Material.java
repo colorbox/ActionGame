@@ -31,6 +31,7 @@ public class Material{
     public boolean getVanish(){return Vanish;}
     public boolean getIsEnemy(){return isEnemy;}
     public ManyHitters getManyHitters(){return manyhitters;}
+    public Sensor getSensor(){return Sensor;}
 
     //setter
     public void setForce(double ForcePower){this.Vector.setForce(ForcePower);}

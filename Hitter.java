@@ -55,7 +55,6 @@ public class Hitter{
 	//絶対座標の更新
 	coordinateRenew(x,y);
 
-	System.out.println(relativeX+","+relativeY+","+getX()+","+getY()+","+getAbsolX()+","+getAbsolY()+","+radius);
     }
 
     //値をまとめて変更

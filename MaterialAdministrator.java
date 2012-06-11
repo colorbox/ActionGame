@@ -5,7 +5,6 @@ import java.awt.*;
 
 //Player属性とEnemy属性の物体を一元管理する。当たり判定が生じるのはPlayerとEnemy間のみなので、これでよいはず
 public class MaterialAdministrator{
-
     //管理対象となる物体群、Player属性
     private ArrayList MaterialsPlayer = new ArrayList();
     //Enemy属性
@@ -14,8 +13,6 @@ public class MaterialAdministrator{
     public MaterialAdministrator(){}
     //物体を新しく追加する。
     public void add(Material material){
-	System.out.println(material.getIsEnemy());
-
 	if(material.getIsEnemy()){
 	    MaterialsEnemy.add(material);
 	}else{

@@ -20,9 +20,14 @@ public class Pointer{
 	ForceRevision();
     }
 
-    //角度のセット
+    //角度のセット(double)
     public void setRad(double Rad){
 	this.Rad=Rad;
+	this.radRevision();
+    }
+    //角度のセット(int)
+    public void setRad(int Rad){
+	this.Rad=Rad*rad1;
 	this.radRevision();
     }
 

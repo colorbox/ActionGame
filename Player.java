@@ -14,11 +14,9 @@ public class Player extends Character{
     public Pointer getCannon(){return Cannon;}
 
     //コンストラクタ
-    public Player(double x,double y,double rad,double force/*,MaterialAdministrator ma*/){
-	//super(x,y,rad,force,ma,false);
+    public Player(double x,double y,double rad,double force){
 	super(x,y,rad,force,false);
 	Cannon=new Pointer(rad,force);
-	//addHitter(new Hitter(16,8,0,0,5));
     }
 
     //API for Behavior
@@ -29,24 +27,30 @@ public class Player extends Character{
     public void moveForward(){
 	setForce(2.0);
 	setRad(0);
+	Cannon.setRad(0);
+	Cannon.setForce(18);
     }
     public void moveBackward(){
 	setForce(2.0);
 	setRad(180);
+	Cannon.setRad(180);
+	Cannon.setForce(18);
     }
     public void jumpNeutral(){
-	setForce(13.0);
-	setRad(-1*Math.PI/2);
+	    setForce(13.0);
+	    setRad(-1*Math.PI/2);
     }
     public void jumpForward(){
-	setForce(13.0);
-	setRad(-1*Math.PI/180*75);
+	    setForce(13.0);
+	    setRad(-1*Math.PI/180*75);
     }
     public void jumpBackward(){
-	setForce(13.0);
-	setRad(-1*Math.PI/180*105);
+	    setForce(13.0);
+	    setRad(-1*Math.PI/180*105);
     }
-    public void attack(){}
+    public void attack(MaterialAdministrator ma){
+	launchMaterial(ma);
+    }
 
     //弾発射
     public void launchMaterial(MaterialAdministrator ma){

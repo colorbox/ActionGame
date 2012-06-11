@@ -1,7 +1,7 @@
 
 //どんな動きをするのかはPlayerに全て記述し、Behaviorはそれを呼び出す形で動作させる。PlayerのAPI的なものを作るという事ではなかろーか
 public class Behavior{
-    private boolean Movemode=false;
+    private boolean Movemode=true;
     public boolean getMoveMode(){return Movemode;}
 
     //モード変更
@@ -25,20 +25,22 @@ public class Behavior{
 	if(Controller.getZPress()){
 	    Player.launchMaterial(ma);
 	}
+	/*
 	if(Controller.getXPress()){
 	    changeMode();
 	}
+	*/
     }
 
     //プレイヤーの振る舞い、移動時
-    public void playerBehaviorMove(Controller Controller,Player Player){
+    public void playerBehaviorMove(Controller Controller,Player Player,MaterialAdministrator ma){
 	//スティック操作
 	int stick = Controller.getStick();
 	//着地状態なら操作可能
 	if(Player.getLanding()){
 	    if(stick == 2){
-		Player.setForce(2.0);
-		Player.setRad(90);
+		//Player.setForce(2.0);
+		//Player.setRad(90);
 	    }else if(stick == 4){
 		Player.moveBackward();
 	    }else if(stick == 5){
@@ -46,13 +48,21 @@ public class Behavior{
 	    }else if(stick == 6){
 		Player.moveForward();
 	    }else if(stick == 7){
+		//接天井状態ならジャンプしない
+		if( !(Player.getSensor()).getRoofing() )
 		Player.jumpBackward();
 	    }else if(stick == 8){
+		if( !(Player.getSensor()).getRoofing() )
 		Player.jumpNeutral();
 	    }else if(stick == 9){
+		if( !(Player.getSensor()).getRoofing() )
 		Player.jumpForward();
 	    }
 	}
+	if(Controller.getZPress()){
+	    Player.attack(ma);
+	}
+	/*
 	//ボタンの処理
 	if(Controller.getXPress()){
 	    changeMode();
@@ -61,12 +71,13 @@ public class Behavior{
 		Player.setForce(0.0);
 	    }
 	}
+	*/
     }
 
     //プレイヤーの振る舞い、分岐
     public void playerBehavior(Controller Controller,Player Player,MaterialAdministrator ma){
 	if(getMoveMode()){
-	    playerBehaviorMove(Controller,Player);
+	    playerBehaviorMove(Controller,Player,ma);
 	}else{
 	    playerBehaviorNotMove(Controller,Player,ma);
 	}
