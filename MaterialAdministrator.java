@@ -96,7 +96,8 @@ public class MaterialAdministrator{
 	    for(int j=0;j<MaterialsPlayer.size();j++){
 		ManyHitters Playermh = ((Material)(MaterialsPlayer.get(j))).getManyHitters();
 		if( Playermh.collisionCheck(Enemymh) ){
-		    System.out.println("あたってる");
+		    //当たり判定時の処理をここに書く
+		    //System.out.println("あたってる");
 		}
 	    }
 	}

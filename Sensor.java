@@ -33,17 +33,17 @@ public class Sensor{
     //パラメータセット
     public void setParam(int x,int y){
 	//Up
-	SensorDots[0].setParam(x+ 4,y-1);
-	SensorDots[1].setParam(x+12,y-1);
+	SensorDots[0].setParam(x+ 1,y-1);
+	SensorDots[1].setParam(x+15,y-1);
 	//Down
-	SensorDots[2].setParam(x+ 4,y+16);
-	SensorDots[3].setParam(x+12,y+16);
+	SensorDots[2].setParam(x+ 1,y+16);
+	SensorDots[3].setParam(x+15,y+16);
 	//Left
-	SensorDots[4].setParam(x-1,y+ 4);
-	SensorDots[5].setParam(x-1,y+12);
+	SensorDots[4].setParam(x-1,y+ 1);
+	SensorDots[5].setParam(x-1,y+15);
 	//Right
-	SensorDots[6].setParam(x+16,y+ 4);
-	SensorDots[7].setParam(x+16,y+12);
+	SensorDots[6].setParam(x+16,y+ 1);
+	SensorDots[7].setParam(x+16,y+15);
     }
 
     //全方向用の状態検査

@@ -46,9 +46,9 @@ public class SensorDot{
 	//内部に入ってる状態なら色を青に、入ってない状態なら赤に
 	if(getInside()){
 	    //System.out.println("BLUE");
-	    g.setColor(new Color(0,0,255));
+	    g.setColor(Color.blue);
 	}else{
-	    g.setColor(new Color(255,0,0));
+	    g.setColor(Color.red);
 	}
 	//点の描写
 	g.drawLine((int)getX(),(int)getY(),(int)getX(),(int)getY());

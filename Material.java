@@ -89,7 +89,6 @@ public class Material{
 	setRad(0.0);
 	//座標をオブジェクトの上に固定する
 	setY( ( (int)getY() - (int)(getY())%16 ) );
-
     }
 
     //位置補正
@@ -97,18 +96,10 @@ public class Material{
 	//センサーの判定
 	Sensor.isInsideJudge(Stage);
 	//接地、接壁、接天井、それらの複合、それぞれの状態をによる処理を行う
-	if(Sensor.getLanding()){
-	    landingOperation(Stage);
-	}
-	if(Sensor.getRoofing()){
-	    roofingOperation(Stage);
-	}
-	if(Sensor.getWallingRight()){
-	    wallingRightOperation(Stage);
-	}
-	if(Sensor.getWallingLeft()){
-	    wallingLeftOperation(Stage);
-	}
+	if(Sensor.getLanding()){landingOperation(Stage);}
+	if(Sensor.getRoofing()){roofingOperation(Stage);}
+	if(Sensor.getWallingRight()){wallingRightOperation(Stage);}
+	if(Sensor.getWallingLeft()){wallingLeftOperation(Stage);}
     }
 
     //物理的移動

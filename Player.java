@@ -66,6 +66,7 @@ public class Player extends Character{
     //描写
     public void draw(Graphics g){
 	//自機描写
+	g.setColor(Color.green);
        	Cannon.draw(g,this.x,this.y);
 	g.drawRect((int)getX(),(int)getY(),15,15);
 	g.drawRect((int)getX()+1,(int)getY()+1,13,13);

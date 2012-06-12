@@ -83,6 +83,5 @@ public class Hitter{
     public void draw(Graphics g){
 	g.setColor(Color.red);
 	g.fillOval(getX()+(relativeX-radius),getY()+(relativeY-radius),2*radius,2*radius);
-	g.setColor(Color.green);
     }
 }
