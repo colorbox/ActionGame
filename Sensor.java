@@ -9,6 +9,7 @@ public class Sensor{
     private boolean WallingRight;
     //着天井しているか
     private boolean Roofing;
+    //上下左右のセンサを宣言
     private SensorDot[] SensorDots = new  SensorDot[8];
 
     //コンストラクタ
@@ -33,17 +34,17 @@ public class Sensor{
     //パラメータセット
     public void setParam(int x,int y){
 	//Up
-	SensorDots[0].setParam(x+ 1,y-1);
-	SensorDots[1].setParam(x+15,y-1);
+	SensorDots[0].setParam(x+ 4,y-1);
+	SensorDots[1].setParam(x+12,y-1);
 	//Down
-	SensorDots[2].setParam(x+ 1,y+16);
-	SensorDots[3].setParam(x+15,y+16);
+	SensorDots[2].setParam(x+ 4,y+16);
+	SensorDots[3].setParam(x+12,y+16);
 	//Left
-	SensorDots[4].setParam(x-1,y+ 1);
-	SensorDots[5].setParam(x-1,y+15);
+	SensorDots[4].setParam(x-1,y+ 4);
+	SensorDots[5].setParam(x-1,y+12);
 	//Right
-	SensorDots[6].setParam(x+16,y+ 1);
-	SensorDots[7].setParam(x+16,y+15);
+	SensorDots[6].setParam(x+16,y+ 4);
+	SensorDots[7].setParam(x+16,y+12);
     }
 
     //全方向用の状態検査
@@ -53,6 +54,12 @@ public class Sensor{
 	}else{
 	    return false;
 	}
+    }
+
+    //センサーの位置とめり込み状態を同時に更新
+    public void updateCoordinate(int[][] Stage,int x,int y){
+	setParam(x,y);
+	isInsideJudge(Stage);
     }
 
     //物体のめり込み具合を調べる

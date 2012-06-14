@@ -62,6 +62,8 @@ public class Material{
 	//Vector.verticleExtractRight();
 	//X座標を補正
 	setX( (int)getX() + 15 - (int)(getX()-1)%16 );
+	//センサを更新
+	Sensor.updateCoordinate(Stage,(int)getX(),(int)getY());
     }
 
     //右
@@ -71,6 +73,9 @@ public class Material{
 	//Vector.verticleExtractLeft();
 	//座標を補正
 	setX( (int)getX() - (int)(getX())%16 );
+	//センサを更新
+	Sensor.updateCoordinate(Stage,(int)getX(),(int)getY());
+
     }
     //接天井処理
     public void roofingOperation(int[][] Stage){
@@ -79,6 +84,8 @@ public class Material{
 	Vector.sideExtractDown();
 	//座標をオブジェクトの下に固定
 	setY( (int)getY() + 15 - (int)(getY()-1)%16) ;
+	//センサを更新
+	Sensor.updateCoordinate(Stage,(int)getX(),(int)getY());
     }
     //接地処理
     public void landingOperation(int[][] Stage){
@@ -89,6 +96,8 @@ public class Material{
 	setRad(0.0);
 	//座標をオブジェクトの上に固定する
 	setY( ( (int)getY() - (int)(getY())%16 ) );
+	//センサの値を更新
+	Sensor.updateCoordinate(Stage,(int)getX(),(int)getY());
     }
 
     //位置補正
