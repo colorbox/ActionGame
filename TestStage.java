@@ -1,4 +1,13 @@
 public class TestStage{
+    public static void TestPrint(Stage stage){
+	int[][] test=stage.getTags();
+	for(int i=0;i<test.length;i++){
+	    for(int j=0;j<test[0].length;j++){
+		System.out.print(test[i][j]);
+	    }
+	    System.out.println();
+	}
+    }
     public static void main(String[] args){
 	//ステージデータ
 	int[][] StageData ={
@@ -30,7 +39,7 @@ public class TestStage{
 	};
 
 	Stage StageTest= new Stage(StageData);
-	StageTest.draw();
+	TestPrint(StageTest);
 
     }
 }

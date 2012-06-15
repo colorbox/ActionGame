@@ -28,6 +28,6 @@ public class Block{
 	}else if(tag==0){
 	    g.setColor(Color.white);
 	}
-	g.fillRect((int)Coordinate.getX(),(int)Coordinate.getY(),15,15);
+	g.fillRect((int)Coordinate.getX(),(int)Coordinate.getY(),16,16);
     }
 }

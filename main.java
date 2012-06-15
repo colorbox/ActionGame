@@ -75,6 +75,7 @@ public class main extends Applet implements Runnable,KeyListener{
 	{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,},
 	{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,},
     };
+    Stage StageData=new Stage(Stage);
 
     //アプレットの初期化時呼び出される
     public void init(){
@@ -98,6 +99,8 @@ public class main extends Applet implements Runnable,KeyListener{
 
     //背景イメージ描画メソッド
     private void drawBackImage(Graphics g){
+	StageData.draw(g);
+	/*
 	g.setColor(new Color(255, 255, 255));
 	g.fillRect(0,0,w,h);
 	for(int i=0;i<Stage.length;i++){
@@ -110,6 +113,8 @@ public class main extends Applet implements Runnable,KeyListener{
 		g.fillRect(16*j,16*i,16,16);
 	    }
 	}
+	*/
+
     }
     //アプレットが表示されると呼び出される
     public void start(){ 
@@ -140,7 +145,11 @@ public class main extends Applet implements Runnable,KeyListener{
 	Image imgBack = createImage(w, h);
 	//グラフィックコンテキスト取得
 	Graphics gBack = imgBack.getGraphics();
+
+
 	drawBackImage(gBack);
+
+
 	//グラフィックコンテキスト破棄
 	gBack.dispose();
 
@@ -153,7 +162,7 @@ public class main extends Applet implements Runnable,KeyListener{
 	    Behavior.playerBehavior(Controller,Player,ma);
 
 	    //物体管理者の物体管理
-	    ma.allOperation(Stage,gBuf);
+	    ma.allOperation(StageData.getTags(),gBuf);
 
 	    //画面の強制更新
 	    repaint();
