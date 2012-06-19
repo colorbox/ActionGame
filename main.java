@@ -23,7 +23,7 @@
 //120611:Behaviorを少しいじる。次はそろそろ敵の追加、それともステージの実装？ステージの実装のほうを先にやるべきだろう、なので次はそっちをやる。
 //120612:Stage作成開始、しかし、その前に壁への激突判定で不安なところがあったので修正、コードをいじって対応したかったが、無理だった、今後の政策に不安が残る、センサの位置をずらして対応。
 //120614:センサ関連のバグ取り、リファクタリングするつもりだったが、座標情報の更新をきっちりしたら思い通りに動いた、前回いじった時にそこが正常に動作しなかったのは何だったんや・・・ステージの作成を始める、テストもきっちり作ってそれなりに順調
-
+//120619:ステージのデータを外部CSVから読み込めるようにしたい、CSVReaderを作り始める。
 
 
 import java.awt.*;
@@ -99,23 +99,10 @@ public class main extends Applet implements Runnable,KeyListener{
 
     //背景イメージ描画メソッド
     private void drawBackImage(Graphics g){
+	//draw with stage
 	StageData.draw(g);
-	/*
-	g.setColor(new Color(255, 255, 255));
-	g.fillRect(0,0,w,h);
-	for(int i=0;i<Stage.length;i++){
-	    for(int j=0;j<Stage[i].length;j++){
-		if(Stage[i][j]==1){
-		    g.setColor(new Color(0,0,0));
-		}else{
-		    g.setColor(new Color(255, 255, 255));
-		}
-		g.fillRect(16*j,16*i,16,16);
-	    }
-	}
-	*/
-
     }
+
     //アプレットが表示されると呼び出される
     public void start(){ 
 	if(thread == null){
@@ -162,7 +149,7 @@ public class main extends Applet implements Runnable,KeyListener{
 	    Behavior.playerBehavior(Controller,Player,ma);
 
 	    //物体管理者の物体管理
-	    ma.allOperation(StageData.getTags(),gBuf);
+	    ma.allOperation(StageData,gBuf);
 
 	    //画面の強制更新
 	    repaint();

@@ -14,22 +14,22 @@ public class Ballet extends Material{
     //でも壁に当たると消えたりする処理が必要。
     //弾は壁に当たると消える。
 
-    public void wallingLeftOperation(int[][] Stage){
+    public void wallingLeftOperation(Stage Stage){
 	//System.out.println("Left");
 	setVanish(true);
     }
 
-    public void wallingRightOperation(int[][] Stage){
+    public void wallingRightOperation(Stage Stage){
 	//System.out.println("Right");
 	setVanish(true);
     }
 
-    public void roofingOperation(int[][] Stage){
+    public void roofingOperation(Stage Stage){
 	//System.out.println("roof");
 	setVanish(true);
     }
 
-    public void landingOperation(int[][] Stage){
+    public void landingOperation(Stage Stage){
 	//System.out.println("land");
 	setVanish(true);
     }

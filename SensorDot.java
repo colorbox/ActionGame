@@ -14,8 +14,8 @@ public class SensorDot{
     public int getX(){return x;}
     public int getY(){return y;}
     public boolean getInside(){return Inside;}
-    //setter
 
+    //setter
     public void setX(int x){this.x=x;}
     public void setY(int y){this.y=y;}
     public void setInside(boolean Inside){this.Inside=Inside;}
@@ -27,14 +27,12 @@ public class SensorDot{
     }
 
     //センサがオブジェクト内にいるかどうか判定
-    public void isInside(int[][] Stage){
+    public void isInside(Stage Stage){
+	//set coordinate information
 	int numX = ((x-x%16)/16);
 	int numY = ((y-y%16)/16);
-
-	//System.out.println("(x,y,Stage[y][x],numX,numY)"+x+","+y+","+Stage[numY][numX]+","+numX+","+numY);
-
-	if(Stage[numY][numX]==1){
-	    //System.out.println("inside!");
+	//get Block information from Stage
+	if(Stage.getPointTag(numX,numY)==1){
 	    setInside(true);
 	}else{
 	    setInside(false);
@@ -45,7 +43,6 @@ public class SensorDot{
     public void draw(Graphics g){
 	//内部に入ってる状態なら色を青に、入ってない状態なら赤に
 	if(getInside()){
-	    //System.out.println("BLUE");
 	    g.setColor(Color.blue);
 	}else{
 	    g.setColor(Color.red);

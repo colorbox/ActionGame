@@ -57,13 +57,13 @@ public class Sensor{
     }
 
     //センサーの位置とめり込み状態を同時に更新
-    public void updateCoordinate(int[][] Stage,int x,int y){
+    public void updateCoordinate(Stage Stage,int x,int y){
 	setParam(x,y);
 	isInsideJudge(Stage);
     }
 
     //物体のめり込み具合を調べる
-    public void isInsideJudge(int[][] Stage){
+    public void isInsideJudge(Stage Stage){
 	//接地、接壁、接天井などの状態を調べる
 	for(int i=0;i<8;i++){
 	    SensorDots[i].isInside(Stage);

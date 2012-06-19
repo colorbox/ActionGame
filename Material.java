@@ -57,7 +57,7 @@ public class Material{
     }
 
     //接壁処理左
-    public void wallingLeftOperation(int[][] Stage){
+    public void wallingLeftOperation(Stage Stage){
 	//左方向のベクトルを除去
 	//Vector.verticleExtractRight();
 	//X座標を補正
@@ -67,7 +67,7 @@ public class Material{
     }
 
     //右
-    public void wallingRightOperation(int[][] Stage){
+    public void wallingRightOperation(Stage Stage){
 	//左右どちらかのセンサがオブジェクト内部に合ったら接壁状態
 	//ベクトルの右方向成分を除去
 	//Vector.verticleExtractLeft();
@@ -78,7 +78,7 @@ public class Material{
 
     }
     //接天井処理
-    public void roofingOperation(int[][] Stage){
+    public void roofingOperation(Stage Stage){
 	//上2つの点がオブジェクト内に入っていたら接天井状態
 	//ベクトルの上方向成分を除去
 	Vector.sideExtractDown();
@@ -88,7 +88,7 @@ public class Material{
 	Sensor.updateCoordinate(Stage,(int)getX(),(int)getY());
     }
     //接地処理
-    public void landingOperation(int[][] Stage){
+    public void landingOperation(Stage Stage){
 	//下2つの点がオブジェクトの内部に入っていたら接地状態
 	//下点が物質内部に入っていたらベクトルを操作、全てのベクトルを消してニュートラルにする。
 	//とりあえず今はニュートラル処理
@@ -101,7 +101,7 @@ public class Material{
     }
 
     //位置補正
-    public void moveRevision(int[][] Stage){
+    public void moveRevision(Stage Stage){
 	//センサーの判定
 	Sensor.isInsideJudge(Stage);
 	//接地、接壁、接天井、それらの複合、それぞれの状態をによる処理を行う

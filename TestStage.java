@@ -1,12 +1,15 @@
 public class TestStage{
     public static void TestPrint(Stage stage){
-	int[][] test=stage.getTags();
-	for(int i=0;i<test.length;i++){
-	    for(int j=0;j<test[0].length;j++){
-		System.out.print(test[i][j]);
+	for(int i=0;i<stage.getYLength();i++){
+	    for(int j=0;j<stage.getXLength();j++){
+		System.out.print(stage.getPointTag(i,j));
 	    }
 	    System.out.println();
 	}
+	int x=1,y=20;
+	System.out.println("("+x+","+y+"):"+stage.getPointTag(x,y));
+	y=19;
+	System.out.println("("+x+","+y+"):"+stage.getPointTag(x,y));
     }
     public static void main(String[] args){
 	//ステージデータ

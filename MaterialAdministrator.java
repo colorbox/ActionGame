@@ -21,7 +21,7 @@ public class MaterialAdministrator{
     }
 
     //物体に関する全処理をこのメソッドで行う
-    public void allOperation(int[][] Stage,Graphics g){
+    public void allOperation(Stage Stage,Graphics g){
 	checkVanish();
 	allMove();
 	allRevision(Stage);
@@ -59,14 +59,14 @@ public class MaterialAdministrator{
     }
 
     //物体リストに適用できる補正
-    private void allRevisionPrime(ArrayList Materials,int[][] Stage){
+    private void allRevisionPrime(ArrayList Materials,Stage Stage){
 	for(int i=0;i<Materials.size();i++){
 	    Material material = (Material)Materials.get(i);
 	    material.moveRevision(Stage);
 	}
     }
     //補正
-    public void allRevision(int[][] Stage){
+    public void allRevision(Stage Stage){
 	allRevisionPrime(MaterialsEnemy,Stage);
 	allRevisionPrime(MaterialsPlayer,Stage);
     }
