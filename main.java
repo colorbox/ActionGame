@@ -21,10 +21,7 @@ public class main extends Applet implements Runnable,KeyListener{
     Timer Timer = new Timer(0);
     //CSVReader
     CSVReader reader = new CSVReader("Data/Stage/testStage.csv");
-    //ステージデータ
-    //int[][] Stage =reader.getStageData();
     //load Stage
-    //Stage StageData=new Stage(Stage);
     Stage StageData=new Stage(reader.getStageData());
 
     //アプレットの初期化時呼び出される
