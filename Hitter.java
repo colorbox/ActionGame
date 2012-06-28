@@ -82,6 +82,6 @@ public class Hitter{
     //描写
     public void draw(Graphics g){
 	g.setColor(Color.red);
-	g.fillOval(getX()+(relativeX-radius),getY()+(relativeY-radius),2*radius,2*radius);
+	g.fillOval((getX()+(relativeX-radius)),(getY()+(relativeY-radius)),2*radius,2*radius);
     }
 }

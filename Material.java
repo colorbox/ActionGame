@@ -146,7 +146,7 @@ public class Material{
     //画面外判定
     public boolean isOut(){
 	//画面外に出ていたら
-	if(x<0.0||x>352.0||y<0.0||y>352.0 ){
+	if(x<0.0||x>1000.0||y<0.0||y>1000.0 ){
 	    setVanish(true);
 	    return getVanish();
 	}else{

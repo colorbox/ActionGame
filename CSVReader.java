@@ -12,14 +12,13 @@ public class CSVReader{
     //getter/setter
     public int[][] getStageData(){return StageData;}
 
-
-    public CSVReader(String str){
+    //init arrangement StageData
+    private ArrayList initStageData(String str){
 	try {
-	    int[][] StageData;
 	    //配列の大きさ
 	    int x=0;
 	    int y=0;
-	    // CSVデータファイル
+	    // CSVデータファイルを読み込み
 	    File csv = new File(str);
 	    //BufferReader
 	    BufferedReader br = new BufferedReader(new FileReader(csv));
@@ -42,25 +41,9 @@ public class CSVReader{
 		x=arrElement.size();
 	    }
 	    br.close();
-
-
+	    //配列を初期化
 	    StageData = new int[y][x];
-
-	    System.out.println(StageData.length+","+StageData[0].length);
-	    
-	    for(int i=0;i<arr.size();i++){
-		ArrayList l = new ArrayList();
-		l = (ArrayList)arr.get(i);
-		for(int j=0;j<l.size();j++){
-		    //String objStr = (l.get(j).toString());
-		    //int num = new Integer(l.get(j));
-		    int num = new Integer((l.get(j).toString()));
-		    //System.out.print(num);
-		    StageData[i][j]=num;
-		}
-	    }
-
-
+	    return arr;
 	} catch (FileNotFoundException e) {
 	    // Fileオブジェクト生成時の例外捕捉
 	    e.printStackTrace();
@@ -68,43 +51,36 @@ public class CSVReader{
 	    // BufferedReaderオブジェクトのクローズ時の例外捕捉
 	    e.printStackTrace();
 	}
-
-
+	return null;
     }
+
+    //Constractor
+    public CSVReader(String str){
+	//get StageData as an ArrayList
+	ArrayList arr = initStageData(str);
+	System.out.println(StageData.length+","+StageData[0].length);
+
+	//init Arrangement
+	for(int i=0;i<StageData.length;i++){
+	    ArrayList l = new ArrayList();
+	    l = (ArrayList)arr.get(i);
+	    for(int j=0;j<StageData[0].length;j++){
+		StageData[i][j] = new Integer( l.get(j).toString() );
+	    }
+	}
+    }
+
+    public void print(){
+	for(int i=0;i<StageData.length;i++){
+	    for(int j=0;j<StageData[0].length;j++){
+		System.out.print(StageData[i][j]+",");
+	    }
+	    System.out.println();
+	}
+    }
+
     public static void main(String[] args) {
 	CSVReader test = new CSVReader("Data/Stage/testStage.csv");
-
-
-	/*
-	try {
-	    // CSVデータファイル
-	    File csv = new File("Data/Stage/testStage.csv");
-
-	    BufferedReader br = new BufferedReader(new FileReader(csv));
-
-	    // 最終行まで読み込む
-	    String line = "";
-	    while ((line = br.readLine()) != null) {
-
-		// 1行をデータの要素に分割
-		StringTokenizer st = new StringTokenizer(line, ",");
-
-		while (st.hasMoreTokens()) {
-		    // 1行の各要素をタブ区切りで表示
-		    //System.out.print(st.nextToken() + ",");
-		}
-		//System.out.println();
-	    }
-	    br.close();
-
-	} catch (FileNotFoundException e) {
-	    // Fileオブジェクト生成時の例外捕捉
-	    e.printStackTrace();
-	} catch (IOException e) {
-	    // BufferedReaderオブジェクトのクローズ時の例外捕捉
-	    e.printStackTrace();
-	}
-	*/
     }
 
 }

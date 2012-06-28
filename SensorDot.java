@@ -47,8 +47,10 @@ public class SensorDot{
 	}else{
 	    g.setColor(Color.red);
 	}
+	int px=(int)getX();
+	int py=(int)getY();
 	//点の描写
-	g.drawLine((int)getX(),(int)getY(),(int)getX(),(int)getY());
+	g.drawLine(px,py,px,py);
 
 	g.setColor((new Color(0, 200,0)));
 
