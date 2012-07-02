@@ -1,4 +1,5 @@
 public class TestStage{
+    public Stage tester;
     public static void TestPrint(Stage stage){
 	for(int i=0;i<stage.getYLength();i++){
 	    for(int j=0;j<stage.getXLength();j++){

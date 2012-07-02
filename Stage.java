@@ -41,30 +41,36 @@ public class Stage{
     public void updateCoordinate(int x, int y){
 	Coordinate.move(x,y);
 
-	System.out.print(getX()+","+getY()+":");
-	System.out.println(x+","+y);
     }
 
-    //camera move
+    //camera move linked with Player move
     public void move(int Px,int Py){
 	//update coordinate
 	updateCoordinate(Px,Py);
 
-	if(Px>168 && Px<getStageWidth()-168){
-	    Coordinate.move(Px,getY());
-	}else if(Px>=getStageWidth()-168){
-	    Coordinate.move(getStageWidth()-168,getY());
-	}else if(Px<=168){
-	    Coordinate.move(Px,getY());
+	if(Px>176 && Px<getStageWidth()-176){
+	    //center:Camera move
+	    updateCoordinate(Px-176,getY());
+	}else if(Px>=getStageWidth()-176){
+	    //right:Camera stable
+	    updateCoordinate(getStageWidth()-352,getY());
+	}else if(Px<=176){
+	    //left:Camera stable
+	    updateCoordinate(0,getY());
 	}
 	
-	if(Py>168 && Py<getStageHeight()-168){
-	    Coordinate.move(getX(),Py);
-	}else if(Py>=getStageHeight()-168){
-	    Coordinate.move(getX(),getStageHeight()-168);
-	}else if(Py<=168){
-	    Coordinate.move(getX(),0);
+	if(Py>176 && Py<getStageHeight()-176){
+	    //center:camera move
+	    updateCoordinate(getX(),Py-176);
+	}else if(Py>=getStageHeight()-176){
+	    //bottom:camera stable
+	    updateCoordinate(getX(),getStageHeight()-352);
+	}else if(Py<=176){
+	    //top:camera stable
+	    updateCoordinate(getX(),0);
 	}
+	System.out.print("Stage:"+getX()+","+getY()+":");
+	System.out.println("Player:"+Px+","+Py);
 	
     }
 

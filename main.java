@@ -38,8 +38,6 @@ public class main extends Applet implements Runnable,KeyListener{
 	addKeyListener(this);
 	//物体管理者の物体追加
 	ma.add(new Material(100,100,0.0,0.0,true));
-	//new Material(200,50,0.0,0.0,ma,true);
-	//new Ballet(300,50,0.0,0.0,ma,true);
 	//Player追加
 	ma.add(Player);
     }
