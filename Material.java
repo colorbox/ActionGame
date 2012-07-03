@@ -3,6 +3,14 @@ import java.lang.Math;
 import java.awt.*;
 import java.applet.Applet;
 
+    //描写用座標
+    protected int DrawX=0,DrawY=0;
+    public int getDrawX(){return DrawX;}
+    public int getDrawY(){return DrawY;}
+    public void setDrawX(int Dx){this.DrawX=DrawX;}
+    public void setDrawY(int Dy){this.DrawY=DrawY;}
+
+
 //ゲームにおける物体のスーパークラス
 public class Material{
     //敵フラグ
