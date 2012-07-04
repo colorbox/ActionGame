@@ -1,49 +1,28 @@
 public class TestStage{
-    public Stage tester;
-    public static void TestPrint(Stage stage){
-	for(int i=0;i<stage.getYLength();i++){
-	    for(int j=0;j<stage.getXLength();j++){
-		System.out.print(stage.getPointTag(i,j));
+    public Stage Stage;
+
+
+    public void TestPrint(){
+	for(int i=0;i<Stage.getYLength();i++){
+	    for(int j=0;j<Stage.getXLength();j++){
+		System.out.print(Stage.getPointTag(j,i));
 	    }
 	    System.out.println();
 	}
-	int x=1,y=20;
-	System.out.println("("+x+","+y+"):"+stage.getPointTag(x,y));
-	y=19;
-	System.out.println("("+x+","+y+"):"+stage.getPointTag(x,y));
     }
+
+
+    public TestStage(Stage stage){
+	Stage = stage;
+    }
+
     public static void main(String[] args){
-	//ステージデータ
-	int[][] StageData ={
-	    {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,},
-	    {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,},
-	    {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,},
-	    {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,},
-	    {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,},
-	    {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,},
+	//CSVReader
+	CSVReader reader = new CSVReader("Data/Stage/testStage.csv");
+	//load Stage
+	TestStage tester = new TestStage( new Stage(reader.getStageData() ));
 
-	    {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,},
-	    {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,},
-	    {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,},
-	    {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,},
-	    {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,},
-
-	    {1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,},
-	    {1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,},
-	    {1,0,1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,},
-	    {1,0,1,1,1,0,0,0,0,0,1,0,0,0,0,0,0,1,1,0,0,1,},
-	    {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,},
-
-	    {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,},
-	    {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,0,1,},
-	    {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,1,1,0,1,},
-	    {1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1,},
-	    {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,},
-	    {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,},
-	};
-
-	Stage StageTest= new Stage(StageData);
-	TestPrint(StageTest);
+	tester.TestPrint();
 
     }
 }

@@ -8,8 +8,8 @@ public class DrawObject{
     public int getDrawX(){return DrawX;}
     public int getDrawY(){return DrawY;}
     //setter
-    public void setDrawX(int Dx){this.DrawX=DrawX;}
-    public void setDrawY(int Dy){this.DrawY=DrawY;}
+    public void setDrawX(int DrawX){this.DrawX=DrawX;}
+    public void setDrawY(int DrawY){this.DrawY=DrawY;}
 
     //constractor
     public DrawObject(int DrawX,int DrawY){
@@ -18,7 +18,7 @@ public class DrawObject{
     }
 
     //coordinate update with Stage coordinate and object coordinate
-    public updateDrawCoordinate(int StageX,inta StageY,int ObjectX,int ObjectY){
+    public void updateDrawCoordinate(int StageX,int StageY,int ObjectX,int ObjectY){
 	setDrawX(ObjectX-StageX);
 	setDrawY(ObjectY-StageY);
     }
