@@ -3,18 +3,8 @@ import java.lang.Math;
 import java.awt.*;
 import java.applet.Applet;
 
-
-/*
-    //描写用座標
-    protected int DrawX=0,DrawY=0;
-    public int getDrawX(){return DrawX;}
-    public int getDrawY(){return DrawY;}
-    public void setDrawX(int Dx){this.DrawX=DrawX;}
-    public void setDrawY(int Dy){this.DrawY=DrawY;}
-*/
-
 //ゲームにおける物体のスーパークラス
-public class Material{
+public class Material extends DrawObject{
     //敵フラグ
     private boolean isEnemy;
     //重力
@@ -54,8 +44,10 @@ public class Material{
 
     //コンストラクタ
     public Material(double x,double y,double rad,double force,boolean isEnemy){
+	super((int)x,(int)y);
 	this.x=x;
 	this.y=y;
+
 	this.Vector=new Pointer(rad,force);
 	setIsEnemy(isEnemy);
 	manyhitters.add(new Hitter(8,8,0,0,5));
@@ -169,6 +161,7 @@ public class Material{
     public void materialDraw(Graphics g){
 	manyhitters.draw(g);
     }
+
     //描写
     public void draw(Graphics g){
 	g.fillOval((int)x,(int)y,15,15);

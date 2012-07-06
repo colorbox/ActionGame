@@ -48,6 +48,7 @@ public class Stage{
 	//update coordinate
 	updateCoordinate(Px,Py);
 
+	//X
 	if(Px>176 && Px<getStageWidth()-176){
 	    //center:Camera move
 	    updateCoordinate(Px-176,getY());
@@ -58,19 +59,24 @@ public class Stage{
 	    //left:Camera stable
 	    updateCoordinate(0,getY());
 	}
-	
+
+	//Y
 	if(Py>176 && Py<getStageHeight()-176){
 	    //center:camera move
 	    updateCoordinate(getX(),Py-176);
 	}else if(Py>=getStageHeight()-176){
+
+	    System.out.println("tes:"+Py);
+	    System.out.println("uuuuuuuu");
+
 	    //bottom:camera stable
 	    updateCoordinate(getX(),getStageHeight()-352);
 	}else if(Py<=176){
 	    //top:camera stable
 	    updateCoordinate(getX(),0);
 	}
-	System.out.print("Stage:"+getX()+","+getY()+":");
-	System.out.println("Player:"+Px+","+Py);
+	//System.out.print("Stage:"+getX()+","+getY()+":");
+	//System.out.println("Player:"+Px+","+Py);
 	
     }
 
