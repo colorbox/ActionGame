@@ -12,7 +12,7 @@ public class main extends Applet implements Runnable,KeyListener{
     Thread thread = null;
     int w, h;
     //自機
-    Player Player = new Player(200.0,200.0,0.0,0.0);
+    Player Player;
     //コントローラー
     Controller Controller =new Controller();
     //振る舞い
@@ -30,6 +30,8 @@ public class main extends Applet implements Runnable,KeyListener{
 	Dimension d = getSize();
 	this.w = d.width;
 	this.h = d.height;
+	//Player init
+	Player = new Player(200.0,200.0,0.0,0.0,w,h);
 	//バッファ生成
 	imgBuf = createImage(w, h);
 	//グラフィックコンテキスト取得
@@ -85,12 +87,8 @@ public class main extends Applet implements Runnable,KeyListener{
 	    //update Background image
 	    drawBackImage(gBack);
 
-
-
 	    //stage camera move 
 	    StageData.move((int)Player.getX(),(int)Player.getY());
-
-
 
 
 	    //背景画像をバッファに描画

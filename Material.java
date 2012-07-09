@@ -130,6 +130,12 @@ public class Material extends DrawObject{
 	manyhitters.setCoordinate((int)getX(),(int)getY());
     }
 
+    //move draw coordinate
+    public void drawMove(int StageX,int StageY){
+	//描写座標の調整
+	updateDrawCoordinate(StageX,StageY,(int)getX(),(int)getY());
+    }
+
     //移動と補正
     public void move(){
 	//物理移動
@@ -158,12 +164,14 @@ public class Material extends DrawObject{
     }
 
 
+    //物体描写
     public void materialDraw(Graphics g){
 	manyhitters.draw(g);
     }
 
     //描写
     public void draw(Graphics g){
+	g.fillOval(getDrawX(),getDrawY(),15,15);
 	g.fillOval((int)x,(int)y,15,15);
 	materialDraw(g);
     }

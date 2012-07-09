@@ -66,8 +66,7 @@ public class Stage{
 	    updateCoordinate(getX(),Py-176);
 	}else if(Py>=getStageHeight()-176){
 
-	    System.out.println("tes:"+Py);
-	    System.out.println("uuuuuuuu");
+	    //System.out.println("tes:"+Py);
 
 	    //bottom:camera stable
 	    updateCoordinate(getX(),getStageHeight()-352);

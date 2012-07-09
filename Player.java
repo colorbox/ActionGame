@@ -5,18 +5,27 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class Player extends Character{
+    //Stage Data
+    private int StageWidth=0,StageHeight=0;
     //砲台
     private Pointer Cannon;
     //移動モードかどうか
     private boolean Movemode =false;
 
-    //getter/setter
+    //setter
+    public void setStageWidth(int StageWidth){this.StageWidth=StageWidth;}
+    public void setStageHeight(int StageHeight){this.StageHeight=StageHeight;}
+    //getter
+    public int getStageHeight(){return StageHeight;}
+    public int getStageWidth(){return StageWidth;}
     public Pointer getCannon(){return Cannon;}
 
     //コンストラクタ
-    public Player(double x,double y,double rad,double force){
+    public Player(double x,double y,double rad,double force,int StageWidth,int StageHeight){
 	super(x,y,rad,force,false);
 	Cannon=new Pointer(rad,force);
+	setStageWidth(StageWidth);
+	setStageHeight(StageHeight);
     }
 
     //API for Behavior
@@ -82,5 +91,11 @@ public class Player extends Character{
 	g.drawLine((int)getX(),(int)getY(),(int)getX(),(int)getY());
 	*/
 
+    }
+
+
+    //override drawmove function
+    public void updateCoordinate(int StageX,int StageY,int ObjectX,int ObjectY){
+	
     }
 }

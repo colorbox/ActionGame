@@ -25,6 +25,7 @@ public class MaterialAdministrator{
 	checkVanish();
 	allMove();
 	allRevision(Stage);
+	allDrawMove(Stage.getX(),Stage.getY());
 	allDraw(g);
 	checkCollision();
     }
@@ -56,6 +57,19 @@ public class MaterialAdministrator{
     public void allMove(){
 	allMovePrime(MaterialsEnemy);
 	allMovePrime(MaterialsPlayer);
+    }
+
+    //物体リストに適用できる描写座標の移動
+    private void allDrawMovePrime(ArrayList Materials,int StageX,int StageY){
+	for(int i=0;i<Materials.size();i++){
+	    Material material = (Material)Materials.get(i);
+	    material.drawMove(StageX,StageY);
+	}
+    }
+    //描写座標の移動
+    public void allDrawMove(int StageX,int StageY){
+	allDrawMovePrime(MaterialsEnemy,StageX,StageY);
+	allDrawMovePrime(MaterialsPlayer,StageX,StageY);
     }
 
     //物体リストに適用できる補正
