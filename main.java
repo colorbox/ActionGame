@@ -10,7 +10,7 @@ public class main extends Applet implements Runnable,KeyListener{
     Graphics gBuf;
     Image imgBuf;
     Thread thread = null;
-    int w, h;
+    int width,height;
     //自機
     Player Player;
     //コントローラー
@@ -27,13 +27,13 @@ public class main extends Applet implements Runnable,KeyListener{
     //アプレットの初期化時呼び出される
     public void init(){
 	//アプレットサイズ取得
-	Dimension d = getSize();
-	this.w = d.width;
-	this.h = d.height;
+	Dimension dimension = getSize();
+	this.width = dimension.width;
+	this.height = dimension.height;
 	//Player init
-	Player = new Player(200.0,200.0,0.0,0.0,w,h);
+	Player = new Player(200.0,200.0,0.0,0.0,StageData.getStageWidth(),StageData.getStageHeight());
 	//バッファ生成
-	imgBuf = createImage(w, h);
+	imgBuf = createImage(width, height);
 	//グラフィックコンテキスト取得
 	gBuf = imgBuf.getGraphics();
 	//キーボードリスナー登録
@@ -76,16 +76,18 @@ public class main extends Applet implements Runnable,KeyListener{
     //メインルーチン
     public void run(){
 	//背景画像の作成
-	Image imgBack = createImage(w, h);
+	Image imgBack = createImage(width, height);
 	//グラフィックコンテキスト取得
 	Graphics gBack = imgBack.getGraphics();
 
 
 
 	while(thread != null){
+	    gBack = imgBack.getGraphics();
 
 	    //update Background image
 	    drawBackImage(gBack);
+	    //drawBackImage(gBuf);
 
 	    //stage camera move 
 	    StageData.move((int)Player.getX(),(int)Player.getY());

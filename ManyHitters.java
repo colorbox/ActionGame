@@ -58,6 +58,14 @@ public class ManyHitters{
 	    drawer.draw(g);
 	}
     }
+    //draw coordinate move
+    public void moveDrawCoordinate(int StageX,int StageY){
+	for(int i=0;i<Hitters.size();i++){
+	    Hitter drawer = (Hitter)Hitters.get(i);
+	    drawer.updateDrawCoordinate(StageX,StageY,drawer.getX(),drawer.getY());
+	}
+
+    }
 }
 
 

@@ -76,12 +76,15 @@ public class Player extends Character{
     public void draw(Graphics g){
 	//自機描写
 	g.setColor(Color.green);
-       	Cannon.draw(g,this.x,this.y);
+
+	//DrawObject
 	int pX,pY;
-	pX=(int)getX();
-	pY=(int)getY();
+	pX=(int)getDrawX();
+	pY=(int)getDrawY();
+       	Cannon.draw(g,pX,pY);
 	g.drawRect(pX,pY,15,15);
 	g.drawRect(pX+1,pY+1,13,13);
+
 
 	//センサの描写
 	Sensor.draw(g);
@@ -93,9 +96,44 @@ public class Player extends Character{
 
     }
 
+    //override updateDrawCoordinate function
+    public void updateDrawCoordinate(int StageX,int StageY,int ObjectX,int ObjectY){
+	int Px = (int)getX();
+	int Py = (int)getY();
 
-    //override drawmove function
-    public void updateCoordinate(int StageX,int StageY,int ObjectX,int ObjectY){
-	
+	//System.out.printf("StageData:%d,%d ",getStageWidth(),getStageHeight());
+	//System.out.printf("PlayerCoordinate:%d,%d ",Px,Py);
+
+	//X
+	if(Px>176 && Px<getStageWidth()-176){
+	    //center:Camera move
+	    //System.out.print("center:");
+	    setDrawX(176);
+	}else if(Px>=getStageWidth()-176){
+	    //right:Camera stable
+	    //System.out.print("right :");
+	    setDrawX(Px-(getStageWidth()-352) );
+	}else if(Px<=176){
+	    //left:Camera stable
+	    //System.out.print("left  :");
+	    setDrawX(Px);
+	}
+
+	//Y
+	if(Py>176 && Py<getStageHeight()-176){
+	    //center:camera move
+	    //System.out.print("cen");
+	    setDrawY(176);
+	}else if(Py>=getStageHeight()-176){
+	    //System.out.println("tes:"+Py);
+	    //bottom:camera stable
+	    //System.out.print("bot");
+	    setDrawY(Py-(getStageHeight()-352));
+	}else if(Py<=176){
+	    //top:camera stable
+	    //System.out.print("top");
+	    setDrawY(Py);
+	}
+	//System.out.println("Player Draw Coordinate:"+getDrawX()+","+getDrawY());
     }
 }

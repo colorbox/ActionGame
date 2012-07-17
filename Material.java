@@ -134,6 +134,10 @@ public class Material extends DrawObject{
     public void drawMove(int StageX,int StageY){
 	//描写座標の調整
 	updateDrawCoordinate(StageX,StageY,(int)getX(),(int)getY());
+	//move Draw Coordinate for Hitter
+	getManyHitters().moveDrawCoordinate(StageX,StageY);
+	//move Draw Coordinate for SensorDots
+	getSensor().moveDrawCoordinate(StageX,StageY);
     }
 
     //移動と補正
@@ -154,7 +158,7 @@ public class Material extends DrawObject{
     //画面外判定
     public boolean isOut(){
 	//画面外に出ていたら
-	if(x<0.0||x>1000.0||y<0.0||y>1000.0 ){
+	if(x<0.0||x>10000.0||y<0.0||y>10000.0 ){
 	    setVanish(true);
 	    return getVanish();
 	}else{

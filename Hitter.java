@@ -3,7 +3,7 @@ import java.awt.*;
 
 
 //当たり判定に関するクラス、「当たり判定クラスを引数にとり当たってるかの判定」「当たり判定位置や半径の変更」「自在に消滅」などをしたりする
-public class Hitter{
+public class Hitter extends DrawObject{
     //基準座標からの相対座標
     private int relativeX=0,relativeY=0;
     //基準座標
@@ -36,6 +36,7 @@ public class Hitter{
 
     //コストラクタ
     public Hitter(int relativeX,int relativeY,int x,int y, int radius){
+	super(0,0);
 	setRelativeX(relativeX);
 	setRelativeY(relativeY);
 	setParam(x,y,radius);
@@ -54,7 +55,6 @@ public class Hitter{
 	setY(y);
 	//絶対座標の更新
 	coordinateRenew(x,y);
-
     }
 
     //値をまとめて変更
@@ -83,5 +83,7 @@ public class Hitter{
     public void draw(Graphics g){
 	g.setColor(Color.red);
 	g.fillOval((getX()+(relativeX-radius)),(getY()+(relativeY-radius)),2*radius,2*radius);
+
+	g.fillOval((getDrawX()+(relativeX-radius)),(getDrawY()+(relativeY-radius)),2*radius,2*radius);
     }
 }

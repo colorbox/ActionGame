@@ -37,10 +37,21 @@ public class Stage{
 	}
     }
 
+    //update each Block of Stage
+    public void moveBlocks(){
+	for(int i=0;i<TheStage.length;i++){
+	    for(int j=0;j<TheStage[0].length;j++){
+		TheStage[i][j].updateDrawCoordinate(getX(),getY(),TheStage[i][j].getX(),TheStage[i][j].getY());
+	    }
+	}
+	//check coordinate
+	//System.out.println(getX()+","+getY()+","+TheStage[3][3].getX()+","+TheStage[3][3].getY()+","+TheStage[3][3].getDrawX()+","+TheStage[3][3].getDrawY()+",");
+
+    }
+
     //update Stage Coordinate
     public void updateCoordinate(int x, int y){
 	Coordinate.move(x,y);
-
     }
 
     //camera move linked with Player move
@@ -74,6 +85,10 @@ public class Stage{
 	    //top:camera stable
 	    updateCoordinate(getX(),0);
 	}
+
+	//move Blocks of Stage
+	moveBlocks();
+
 	//System.out.print("Stage:"+getX()+","+getY()+":");
 	//System.out.println("Player:"+Px+","+Py);
 	

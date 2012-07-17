@@ -1,12 +1,13 @@
 import java.awt.*;
 import java.applet.Applet;
 
-public class SensorDot{
+public class SensorDot extends DrawObject{
 
     //指定の座標がオブジェクト内部にあるかどうかの判定
     private int x=0,y=0;
     private boolean Inside=false;
     public SensorDot(int x,int y){
+	super(0,0);
 	setParam(x,y);
     }
 
@@ -51,8 +52,8 @@ public class SensorDot{
 	int py=(int)getY();
 	//点の描写
 	g.drawLine(px,py,px,py);
+	g.drawLine(getDrawX(),getDrawY(),getDrawX(),getDrawY());
 
-	g.setColor((new Color(0, 200,0)));
 
     }
 

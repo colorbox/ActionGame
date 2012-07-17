@@ -47,6 +47,13 @@ public class Sensor{
 	SensorDots[7].setParam(x+16,y+12);
     }
 
+    //move sensor dot draw coordinate
+    public void moveDrawCoordinate(int StageX,int StageY){
+	for(int i=0;i<SensorDots.length;i++){
+	    SensorDots[i].updateDrawCoordinate(StageX,StageY,SensorDots[i].getX(),SensorDots[i].getY());
+	}
+    }
+
     //全方向用の状態検査
     private boolean isInsideForAllDirection(int index1,int index2){
 	if(SensorDots[index1].getInside() && SensorDots[index2].getInside()){
