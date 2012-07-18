@@ -7,7 +7,7 @@ public class SensorDot extends DrawObject{
     private int x=0,y=0;
     private boolean Inside=false;
     public SensorDot(int x,int y){
-	super(0,0);
+	super(x,y);
 	setParam(x,y);
     }
 
@@ -48,10 +48,10 @@ public class SensorDot extends DrawObject{
 	}else{
 	    g.setColor(Color.red);
 	}
-	int px=(int)getX();
-	int py=(int)getY();
+	//int px=(int)getX();
+	//int py=(int)getY();
 	//点の描写
-	g.drawLine(px,py,px,py);
+	//g.drawLine(px,py,px,py);
 	g.drawLine(getDrawX(),getDrawY(),getDrawX(),getDrawY());
 
 

@@ -36,7 +36,7 @@ public class Hitter extends DrawObject{
 
     //コストラクタ
     public Hitter(int relativeX,int relativeY,int x,int y, int radius){
-	super(0,0);
+	super(x,y);
 	setRelativeX(relativeX);
 	setRelativeY(relativeY);
 	setParam(x,y,radius);
@@ -82,7 +82,7 @@ public class Hitter extends DrawObject{
     //描写
     public void draw(Graphics g){
 	g.setColor(Color.red);
-	g.fillOval((getX()+(relativeX-radius)),(getY()+(relativeY-radius)),2*radius,2*radius);
+	//g.fillOval((getX()+(relativeX-radius)),(getY()+(relativeY-radius)),2*radius,2*radius);
 
 	g.fillOval((getDrawX()+(relativeX-radius)),(getDrawY()+(relativeY-radius)),2*radius,2*radius);
     }

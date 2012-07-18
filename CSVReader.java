@@ -58,7 +58,7 @@ public class CSVReader{
     public CSVReader(String str){
 	//get StageData as an ArrayList
 	ArrayList arr = initStageData(str);
-	System.out.println(StageData.length+","+StageData[0].length);
+	//System.out.println(StageData.length+","+StageData[0].length);
 
 	//init Arrangement
 	for(int i=0;i<StageData.length;i++){

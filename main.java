@@ -89,8 +89,6 @@ public class main extends Applet implements Runnable,KeyListener{
 	    drawBackImage(gBack);
 	    //drawBackImage(gBuf);
 
-	    //stage camera move 
-	    StageData.move((int)Player.getX(),(int)Player.getY());
 
 
 	    //背景画像をバッファに描画
@@ -98,6 +96,10 @@ public class main extends Applet implements Runnable,KeyListener{
 
 	    //自機の操作
 	    Behavior.playerBehavior(Controller,Player,ma);
+
+	    //stage camera move 
+	    StageData.move((int)Player.getX(),(int)Player.getY());
+
 
 	    //物体管理者の物体管理
 	    ma.allOperation(StageData,gBuf);

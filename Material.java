@@ -176,7 +176,7 @@ public class Material extends DrawObject{
     //描写
     public void draw(Graphics g){
 	g.fillOval(getDrawX(),getDrawY(),15,15);
-	g.fillOval((int)x,(int)y,15,15);
+	//g.fillOval((int)x,(int)y,15,15);
 	materialDraw(g);
     }
 }
