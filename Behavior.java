@@ -4,34 +4,6 @@ public class Behavior{
     private boolean Movemode=true;
     public boolean getMoveMode(){return Movemode;}
 
-    //モード変更
-    public void changeMode(){
-	if(Movemode){
-	    Movemode=false;
-	}else{
-	    Movemode=true;
-	}
-    }
-
-    //プレイヤーの振る舞い、非移動時
-    public void playerBehaviorNotMove(Controller Controller,Player Player,MaterialAdministrator ma){
-	//スティック操作
-	int stick = Controller.getStick();
-	if(stick == 6){Player.getCannon().radConvert(+5);}
-	if(stick == 4){Player.getCannon().radConvert(-5);}
-	if(stick == 8){Player.getCannon().forceConvert(3.0);}
-	if(stick == 2){Player.getCannon().forceConvert(-3.0);}
-	//ボタン操作
-	if(Controller.getZPress()){
-	    Player.launchMaterial(ma);
-	}
-	/*
-	if(Controller.getXPress()){
-	    changeMode();
-	}
-	*/
-    }
-
     //プレイヤーの振る舞い、移動時
     public void playerBehaviorMove(Controller Controller,Player Player,MaterialAdministrator ma){
 	//スティック操作
@@ -62,24 +34,12 @@ public class Behavior{
 	if(Controller.getZPress()){
 	    Player.attack(ma);
 	}
-	/*
-	//ボタンの処理
-	if(Controller.getXPress()){
-	    changeMode();
-	    //移動時にモードを変える時に動きっぱなしにならないようにする
-	    if(Player.getLanding()){
-		Player.setForce(0.0);
-	    }
-	}
-	*/
     }
 
     //プレイヤーの振る舞い、分岐
     public void playerBehavior(Controller Controller,Player Player,MaterialAdministrator ma){
 	if(getMoveMode()){
 	    playerBehaviorMove(Controller,Player,ma);
-	}else{
-	    playerBehaviorNotMove(Controller,Player,ma);
 	}
     }
 

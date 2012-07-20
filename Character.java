@@ -6,6 +6,7 @@ public class Character extends Material{
     }
 
     //API群
+    //API for Behavior
     public void neutral(){}
     public void moveForward(){}
     public void moveBackward(){}

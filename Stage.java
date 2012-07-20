@@ -30,8 +30,28 @@ public class Stage{
 
     //draw Stage
     public void draw(Graphics g){
+	/*
+	//ステージの位置から描写位置を割り出す。
+	//ステージの座標を取得
+	int x = getX(),y = getY();
+	int difx=24,dify=24;
+	//描写する長さは画面の大きさ352*352よりも四辺が一ブロック分長い384*384、22*22→24*24の部分を描写する。
+	//どのブロック位置から描写するかを算出する
+	x = (int)(x- x%16)/16;
+	y = (int)(y- y%16)/16;
+	//for文を開始のブロック位置から始めて+24の位置まで描写するように変更する
+	if(TheStage.length<24){
+	    dify=22;
+	}
+	if(TheStage[0].length<24){
+	    difx=22;
+	}
+	System.out.println("x:"+x+"y:"+y+"difx:"+difx+"dif:"+dify);
+	*/
 	for(int i=0;i<TheStage.length;i++){
-	    for(int j=0;j<TheStage[0].length;j++){
+	for(int j=0;j<TheStage[0].length;j++){
+	//for(int i=y;i<y+dify;i++){
+	//for(int j=x;j<x+difx;j++){
 		TheStage[i][j].draw(g);
 	    }
 	}

@@ -28,7 +28,6 @@ public class Player extends Character{
 	setStageHeight(StageHeight);
     }
 
-    //API for Behavior
     public void neutral(){
 	setForce(0.0);
 	setRad(0.0);
@@ -46,16 +45,20 @@ public class Player extends Character{
 	Cannon.setForce(18);
     }
     public void jumpNeutral(){
-	    setForce(13.0);
-	    setRad(-1*Math.PI/2);
+	setForce(13.0);
+	setRad(-1*Math.PI/2);
     }
     public void jumpForward(){
-	    setForce(13.0);
-	    setRad(-1*Math.PI/180*75);
+	setForce(13.0);
+	setRad(-1*Math.PI/180*75);
+	Cannon.setRad(0);
+	Cannon.setForce(18);
     }
     public void jumpBackward(){
-	    setForce(13.0);
-	    setRad(-1*Math.PI/180*105);
+	setForce(13.0);
+	setRad(-1*Math.PI/180*105);
+	Cannon.setRad(180);
+	Cannon.setForce(18);
     }
     public void attack(MaterialAdministrator ma){
 	launchMaterial(ma);
@@ -89,10 +92,6 @@ public class Player extends Character{
 	//センサの描写
 	Sensor.draw(g);
 	materialDraw(g);
-	/*
-	g.setColor((new Color(200, 200,200)));
-	g.drawLine((int)getX(),(int)getY(),(int)getX(),(int)getY());
-	*/
 
     }
 
@@ -100,40 +99,28 @@ public class Player extends Character{
     public void updateDrawCoordinate(int StageX,int StageY,int ObjectX,int ObjectY){
 	int Px = (int)getX();
 	int Py = (int)getY();
-
-	//System.out.printf("StageData:%d,%d ",getStageWidth(),getStageHeight());
-	//System.out.printf("PlayerCoordinate:%d,%d ",Px,Py);
-
 	//X
 	if(Px>176 && Px<getStageWidth()-176){
 	    //center:Camera move
-	    //System.out.print("center:");
 	    setDrawX(176);
 	}else if(Px>=getStageWidth()-176){
 	    //right:Camera stable
-	    //System.out.print("right :");
 	    setDrawX(Px-(getStageWidth()-352) );
 	}else if(Px<=176){
 	    //left:Camera stable
-	    //System.out.print("left  :");
 	    setDrawX(Px);
 	}
 
 	//Y
 	if(Py>176 && Py<getStageHeight()-176){
 	    //center:camera move
-	    //System.out.print("cen");
 	    setDrawY(176);
 	}else if(Py>=getStageHeight()-176){
-	    //System.out.println("tes:"+Py);
 	    //bottom:camera stable
-	    //System.out.print("bot");
 	    setDrawY(Py-(getStageHeight()-352));
 	}else if(Py<=176){
 	    //top:camera stable
-	    //System.out.print("top");
 	    setDrawY(Py);
 	}
-	//System.out.println("Player Draw Coordinate:"+getDrawX()+","+getDrawY());
     }
 }
