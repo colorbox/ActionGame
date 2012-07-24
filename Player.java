@@ -5,6 +5,11 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class Player extends Character{
+    private PlayerBehavior playerbehavior;
+    public void setPlayerBehavior(PlayerBehavior playerbehavior){this.playerbehavior=playerbehavior;}
+    public PlayerBehavior getPlayerBehavior(){return playerbehavior;}
+
+    
     //Stage Data
     private int StageWidth=0,StageHeight=0;
     //砲台

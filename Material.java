@@ -28,6 +28,7 @@ public class Material extends DrawObject{
     public double getX(){return x;}
     public double getY(){return y;}
     public boolean getLanding(){return Sensor.getLanding();}
+    public boolean getRoofing(){return Sensor.getRoofing();}
     public boolean getVanish(){return Vanish;}
     public boolean getIsEnemy(){return isEnemy;}
     public ManyHitters getManyHitters(){return manyhitters;}

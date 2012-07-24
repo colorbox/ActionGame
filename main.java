@@ -4,7 +4,7 @@ import java.util.Random;
 import java.awt.event.*;
 
 public class main extends Applet implements Runnable,KeyListener{
-    //テスト用物体管理者
+    //物体管理者
     MaterialAdministrator ma = new MaterialAdministrator();
     //オフスクリーンバッファのグラフィックコンテキスト
     Graphics gBuf;
@@ -16,7 +16,7 @@ public class main extends Applet implements Runnable,KeyListener{
     //コントローラー
     Controller Controller =new Controller();
     //振る舞い
-    Behavior Behavior = new Behavior();
+    PlayerBehavior PlayerBehavior = new PlayerBehavior();
     //タイマー
     Timer Timer = new Timer(0);
     //CSVReader
@@ -32,6 +32,9 @@ public class main extends Applet implements Runnable,KeyListener{
 	this.height = dimension.height;
 	//Player init
 	Player = new Player(200.0,200.0,0.0,0.0,StageData.getStageWidth(),StageData.getStageHeight());
+	//set Player's behaviorXXX(Characterのコンストラクタと一緒にいじる)
+	Player.setPlayerBehavior(PlayerBehavior);
+
 	//バッファ生成
 	imgBuf = createImage(width, height);
 	//グラフィックコンテキスト取得
@@ -39,7 +42,7 @@ public class main extends Applet implements Runnable,KeyListener{
 	//キーボードリスナー登録
 	addKeyListener(this);
 	//物体管理者の物体追加
-	ma.add(new Material(100,100,0.0,0.0,true));
+	ma.add(new Enemy(100,100,0.0,0.0));
 	//Player追加
 	ma.add(Player);
     }
@@ -50,6 +53,7 @@ public class main extends Applet implements Runnable,KeyListener{
 	StageData.draw(g);
     }
 
+
     //アプレットが表示されると呼び出される
     public void start(){
 	if(thread == null){
@@ -59,43 +63,24 @@ public class main extends Applet implements Runnable,KeyListener{
 	    thread.start();
 	}
     }
-
-    //キー押下時
-    public void keyPressed(KeyEvent e){
-	Controller.keyPressed(e,Timer.getTime());
-    }
-
-    //キー離し
-    public void keyReleased(KeyEvent e){
-	Controller.keyReleased(e,Timer.getTime());
-    }
-
-    //keyTyped
-    public void keyTyped(KeyEvent e){}
-
     //メインルーチン
     public void run(){
-	//背景画像の作成
+	//描写領域の生成
 	Image imgBack = createImage(width, height);
-	//グラフィックコンテキスト取得
-	Graphics gBack = imgBack.getGraphics();
-
-
-
+	//グラフィック生成
+	Graphics gBack;
+	//game loop
 	while(thread != null){
+	    //draw
 	    gBack = imgBack.getGraphics();
-
 	    //update Background image
 	    drawBackImage(gBack);
-	    //drawBackImage(gBuf);
-
-
 
 	    //背景画像をバッファに描画
 	    gBuf.drawImage(imgBack, 0, 0, this);
 
-	    //自機の操作
-	    Behavior.playerBehavior(Controller,Player,ma);
+	    //自機の操作XXX(Characterのコンストラクタと一緒にいじる)
+	    Player.getPlayerBehavior().playerMoveBehavior(Controller,Player,ma);
 
 	    //stage camera move 
 	    StageData.move((int)Player.getX(),(int)Player.getY());
@@ -109,8 +94,6 @@ public class main extends Applet implements Runnable,KeyListener{
 
 	    //コントローラーの値を全てリセット
 	    Controller.buttonReset();
-
-
 
 	    //グラフィックコンテキスト破棄
 	    gBack.dispose();
@@ -137,4 +120,20 @@ public class main extends Applet implements Runnable,KeyListener{
 	    thread = null;
 	}
     }
+    //キー押下時
+    public void keyPressed(KeyEvent e){
+	Controller.keyPressed(e,Timer.getTime());
+    }
+
+    //キー離し
+    public void keyReleased(KeyEvent e){
+	Controller.keyReleased(e,Timer.getTime());
+    }
+
+    //keyTyped
+    public void keyTyped(KeyEvent e){}
+
+
+
+
 }
