@@ -9,6 +9,7 @@ public class MaterialAdministrator{
     private ArrayList MaterialsPlayer = new ArrayList();
     //Enemy属性
     private ArrayList MaterialsEnemy = new ArrayList();
+
     //コンストラクタ
     public MaterialAdministrator(){}
     //物体を新しく追加する。

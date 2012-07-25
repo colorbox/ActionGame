@@ -6,6 +6,8 @@ import java.awt.event.*;
 public class main extends Applet implements Runnable,KeyListener{
     //物体管理者
     MaterialAdministrator ma = new MaterialAdministrator();
+    //敵の振る舞い管理
+    EnemyBehaviorAdministrator EBA = new EnemyBehaviorAdministrator();
     //オフスクリーンバッファのグラフィックコンテキスト
     Graphics gBuf;
     Image imgBuf;
@@ -32,6 +34,7 @@ public class main extends Applet implements Runnable,KeyListener{
 	this.height = dimension.height;
 	//Player init
 	Player = new Player(200.0,200.0,0.0,0.0,StageData.getStageWidth(),StageData.getStageHeight());
+
 	//set Player's behaviorXXX(Characterのコンストラクタと一緒にいじる)
 	Player.setPlayerBehavior(PlayerBehavior);
 
@@ -41,8 +44,16 @@ public class main extends Applet implements Runnable,KeyListener{
 	gBuf = imgBuf.getGraphics();
 	//キーボードリスナー登録
 	addKeyListener(this);
-	//物体管理者の物体追加
-	ma.add(new Enemy(100,100,0.0,0.0));
+
+	//test enemy
+	Enemy enemy = new Enemy(100,100,0.0,0.0);
+
+
+	//物体管理者の敵追加
+	ma.add(enemy);
+	//振る舞い管理に敵を追加
+	EBA.add(enemy);
+
 	//Player追加
 	ma.add(Player);
     }
@@ -81,6 +92,9 @@ public class main extends Applet implements Runnable,KeyListener{
 
 	    //自機の操作XXX(Characterのコンストラクタと一緒にいじる)
 	    Player.getPlayerBehavior().playerMoveBehavior(Controller,Player,ma);
+
+	    //敵の振る舞い
+	    EBA.enemiesBehavior(Timer.getTime());
 
 	    //stage camera move 
 	    StageData.move((int)Player.getX(),(int)Player.getY());
