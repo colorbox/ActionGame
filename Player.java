@@ -84,7 +84,6 @@ public class Player extends Character{
     public void draw(Graphics g){
 	//自機描写
 	g.setColor(Color.green);
-
 	//DrawObject
 	int pX,pY;
 	pX=(int)getDrawX();
@@ -92,8 +91,6 @@ public class Player extends Character{
        	Cannon.draw(g,pX,pY);
 	g.drawRect(pX,pY,15,15);
 	g.drawRect(pX+1,pY+1,13,13);
-
-
 	//センサの描写
 	Sensor.draw(g);
 	materialDraw(g);
@@ -128,4 +125,12 @@ public class Player extends Character{
 	    setDrawY(Py);
 	}
     }
+
+    //when hit
+    public void hit(Material Enemy){
+	
+	System.out.println("hit in Player");
+    }
+
+
 }

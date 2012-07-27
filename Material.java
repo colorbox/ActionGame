@@ -48,7 +48,6 @@ public class Material extends DrawObject{
 	super((int)x,(int)y);
 	this.x=x;
 	this.y=y;
-
 	this.Vector=new Pointer(rad,force);
 	setIsEnemy(isEnemy);
 	manyhitters.add(new Hitter(8,8,0,0,5));
@@ -179,5 +178,10 @@ public class Material extends DrawObject{
 	g.fillOval(getDrawX(),getDrawY(),15,15);
 	//g.fillOval((int)x,(int)y,15,15);
 	materialDraw(g);
+    }
+
+    //when hit
+    public void hit(Material material){
+	System.out.println("hit in Material");
     }
 }

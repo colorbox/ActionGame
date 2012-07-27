@@ -23,6 +23,7 @@ public class MaterialAdministrator{
 
     //物体に関する全処理をこのメソッドで行う
     public void allOperation(Stage Stage,Graphics g){
+	checkCollision();
 	checkVanish();
 	allMove();
 	allRevision(Stage);
@@ -111,6 +112,11 @@ public class MaterialAdministrator{
 	    for(int j=0;j<MaterialsPlayer.size();j++){
 		ManyHitters Playermh = ((Material)(MaterialsPlayer.get(j))).getManyHitters();
 		if( Playermh.collisionCheck(Enemymh) ){
+		    //敵物体と自機物体が衝突した時の判定.hitted()みたいなメソッドをそれぞれ呼び出す。
+		    Material Enemy = (Material)MaterialsEnemy.get(i);
+		    Material Player = (Material)MaterialsPlayer.get(j);
+		    Enemy.hit(Player);
+		    Player.hit(Enemy);
 		    //当たり判定時の処理をここに書く
 		    //System.out.println("あたってる");
 		}

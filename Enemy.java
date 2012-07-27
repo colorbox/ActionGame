@@ -28,5 +28,10 @@ public class Enemy extends Character{
     public void jumpBackward(){}
     public void attack(){}
 
+    //when hit
+    public void hit(Material Player){
+	System.out.println("hit in Enemy");
+    }
+
 }
 

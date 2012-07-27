@@ -1,4 +1,9 @@
 public class Character extends Material{
+    //HP
+    private int HP;
+    //getter/setter
+    public void setHP(int HP){this.HP=HP;}
+    public int getHP(){return HP;}
     //コンストラクタ
     public Character(double x,double y,double rad,double force,boolean isEnemy){
 	super(x,y,rad,force,isEnemy);
