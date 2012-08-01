@@ -8,6 +8,7 @@ public class Enemy extends Character{
     public Enemy(double x,double y,double rad,double force){
 	super(x,y,rad,force,true);
 	setBehavior(new Behavior());
+	setClassName("Enemy");
     }
 
     //API for Behavior
@@ -29,8 +30,15 @@ public class Enemy extends Character{
     public void attack(){}
 
     //when hit
-    public void hit(Material Player){
-	System.out.println("hit in Enemy");
+    public void hited(Player Player){
+	System.out.println("hit in Enemy with argument Player");
+    }
+    public void hited(Material Player){
+	System.out.println("hit in Enemy with argument Material");
+    }
+    //when hit
+    public void hited(Ballet Player){
+	System.out.println("hit in Enemy with Player Ballet");
     }
 
 }

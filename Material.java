@@ -5,6 +5,8 @@ import java.applet.Applet;
 
 //ゲームにおける物体のスーパークラス
 public class Material extends DrawObject{
+    //クラス名(おおまかな分類、Enemy,Ballet,Player,Material)
+    private String ClassName;
     //敵フラグ
     private boolean isEnemy;
     //重力
@@ -33,6 +35,7 @@ public class Material extends DrawObject{
     public boolean getIsEnemy(){return isEnemy;}
     public ManyHitters getManyHitters(){return manyhitters;}
     public Sensor getSensor(){return Sensor;}
+    public String getClassName(){return ClassName;}
 
     //setter
     public void setForce(double ForcePower){this.Vector.setForce(ForcePower);}
@@ -42,6 +45,7 @@ public class Material extends DrawObject{
     public void setY(double y){this.y=y;}
     public void setVanish(boolean Vanish){this.Vanish=Vanish;}
     public void setIsEnemy(boolean isEnemy){this.isEnemy=isEnemy;}
+    public void setClassName(String ClassName){this.ClassName=ClassName;}
 
     //コンストラクタ
     public Material(double x,double y,double rad,double force,boolean isEnemy){
@@ -51,6 +55,7 @@ public class Material extends DrawObject{
 	this.Vector=new Pointer(rad,force);
 	setIsEnemy(isEnemy);
 	manyhitters.add(new Hitter(8,8,0,0,5));
+	setClassName("Material");
     }
 
     //あたり範囲を追加
@@ -181,7 +186,18 @@ public class Material extends DrawObject{
     }
 
     //when hit
-    public void hit(Material material){
-	System.out.println("hit in Material");
+    public void hited(Material material){
+	System.out.println("hit in Material with argument Material");
+    }
+    public void hited(Player material){
+	System.out.println("hit in Material with argument Player");
+    }
+    //when hit
+    public void hited(Character material){
+	System.out.println("hit in Material with argument Character");
+    }
+    //when hit
+    public void hited(Ballet material){
+	System.out.println("hit in Material with argument Ballet");
     }
 }

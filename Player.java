@@ -31,6 +31,7 @@ public class Player extends Character{
 	Cannon=new Pointer(rad,force);
 	setStageWidth(StageWidth);
 	setStageHeight(StageHeight);
+	setClassName("Player");
     }
 
     public void neutral(){
@@ -127,9 +128,15 @@ public class Player extends Character{
     }
 
     //when hit
-    public void hit(Material Enemy){
+    public void hited(Material Enemy){	
+	System.out.println("hit in Player with argument Material");
+    }
+    public void hited(Enemy Enemy){	
+	System.out.println("hit in Player with argument Enemy");
+    }
+    public void hited(Ballet Enemy){
 	
-	System.out.println("hit in Player");
+	System.out.println("hit in Player with argument Ballet");
     }
 
 
