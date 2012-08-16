@@ -41,13 +41,13 @@ public class Ballet extends Material{
     public void hited(Material material){
 	System.out.println("hit in Ballet with argument Material");
     }
-    public void hited(Ballet material){
+    public void hited(Ballet ballet){
 	System.out.println("hit in Ballet with argument Ballet");
     }
-    public void hited(Enemy material){
+    public void hited(Enemy enemy){
 	System.out.println("hit in Ballet with argument Enemy");
     }
-    public void hited(Player material){
+    public void hited(Player player){
 	System.out.println("hit in Ballet with argument Player");
     }
 

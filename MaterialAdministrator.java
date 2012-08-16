@@ -5,11 +5,31 @@ import java.awt.*;
 
 //Player属性とEnemy属性の物体を一元管理する。当たり判定が生じるのはPlayerとEnemy間のみなので、これでよいはず
 public class MaterialAdministrator{
+    /*
+    private ArrayList<Character> Player = new ArrayList<Character>();
+    private ArrayList<Character> Enemy = new ArrayList<Character>();
+    private ArrayList<Ballet> PlayerBallet = new ArrayList<Ballet>();
+    private ArrayList<Ballet> EnemyBallet = new ArrayList<Ballet>();
+    //管理対象となる物体群、Character:0,Ballet:1,Player属性
+    private ArrayList[] MaterialsPlayer = {Player,PlayerBallet};
+    //Enemy属性
+    private ArrayList[] MaterialsEnemy = {Enemy,EnemyBallet};
+    */
+
+    //管理対象となる物体群、Character:0,Ballet:1,Player属性
+    private ArrayList[] MaterialsPlayer = {new ArrayList<T>(),new ArrayList<T>()};
+    //Enemy属性
+    private ArrayList[] MaterialsEnemy = {new ArrayList<T>(),new ArrayList<T>()};
+
+    /*
     //管理対象となる物体群、Character:0,Ballet:1,Player属性
     private ArrayList[] MaterialsPlayer = {new ArrayList(),new ArrayList()};
     //Enemy属性
     private ArrayList[] MaterialsEnemy = {new ArrayList(),new ArrayList()};
     //private ArrayList[] test={new ArrayList(),new ArrayList()};
+    */
+
+
 
     //コンストラクタ
     public MaterialAdministrator(){}
@@ -137,8 +157,9 @@ public class MaterialAdministrator{
     //→Materialとして扱ってそれらを呼べば、適切に処理されるようにする、当たる方、当てられる方両方ある、呼び出し方に気をつける。
 
     //Check collision Player's and Enemy's Materials
+    /*
+
     public void checkCollision(){
-	/*
 	for(int i=0;i<MaterialsEnemy.size();i++){
 	    ManyHitters Enemymh = ((Material)(MaterialsEnemy.get(i))).getManyHitters();
 	    for(int j=0;j<MaterialsPlayer.size();j++){
@@ -149,8 +170,8 @@ public class MaterialAdministrator{
 		}
 	    }
 	}
-	*/
     }
+    */
     //XXX
     //checkCollisionPrimeに相当するメソッドが必要。リストを受け取って各々のリスト同士で当たり判定のチェック。
     //敵キャラ-味方キャラ,敵キャラ-味方弾,味方キャラ-敵弾,味方弾-敵弾,の4つに適用できるものが相応しい。
@@ -158,17 +179,40 @@ public class MaterialAdministrator{
     //XXX
     //そもそも9割方同じ動きをしているクラスが3つもあって見苦しい。一つにまとめたい。
     //キャストする必要性に迫られて3つある、最初からリストの型を決めてやればキャストせずに適切にオーバーロードが為されるのでは？
-    public void checkCollision_CharaBallet(ArrayList Charactors,ArrayList Ballets){
-	for(int i=0;i<Charactors.size();i++){
-	    ManyHitters EnemyMH = ((Charactor)Charactors.get(i)).getManyHitters();
+    public void checkCollision(){
+    }
+
+    public void checkTypeAll(){
+	for(int i=0;i<2;i++){
+	    checkType(MaterialsEnemy[i]);
+	    checkType(MaterialsPlayer[i]);
+	}
+    }
+
+    public void checkType(ArrayList arr){
+	for(int i=0;i<arr.size();i++){
+	    System.out.println(arr.get(i)+"is Character?:"+ (arr.get(i) instanceof Character));
+	    System.out.println(arr.get(i)+"is Ballet?   :"+ (arr.get(i) instanceof Ballet));
+	    System.out.println((Material)arr.get(i));
+	    //T test = (T)arr.get(i);
+	    //test.getManyHitters();
+	}
+    }
+
+    //ここから下はうんこ
+    /*
+    public void checkCollision_CharaBallet(ArrayList Characters,ArrayList Ballets){
+	for(int i=0;i<Characters.size();i++){
+	    ManyHitters EnemyMH = (Characters.get(i)).getManyHitters();
 	    for(int j=0;j<Ballets.size();j++){
-		ManyHitters BalletMH = ((Ballet)Ballets.get(i)).getManyHitters();
+		ManyHitters BalletMH = Ballets.get(j).getManyHitters();
 		if(EnemyMH.collisionCheck(BalletMH)){
-		    System.out.println("there is collision Charactor and Ballet");
+		    System.out.println("there is collision.");
 		}
 	    }
 	}
     }
+    */
     public void checkCollision_CharaChara(ArrayList Enemies,ArrayList Players){
 	
     }

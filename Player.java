@@ -128,14 +128,13 @@ public class Player extends Character{
     }
 
     //when hit
-    public void hited(Material Enemy){	
+    public void hited(Material Enemy){
 	System.out.println("hit in Player with argument Material");
     }
-    public void hited(Enemy Enemy){	
+    public void hited(Enemy Enemy){
 	System.out.println("hit in Player with argument Enemy");
     }
     public void hited(Ballet Enemy){
-	
 	System.out.println("hit in Player with argument Ballet");
     }
 

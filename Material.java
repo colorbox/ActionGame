@@ -189,15 +189,15 @@ public class Material extends DrawObject{
     public void hited(Material material){
 	System.out.println("hit in Material with argument Material");
     }
-    public void hited(Player material){
+    public void hited(Player Player){
 	System.out.println("hit in Material with argument Player");
     }
     //when hit
-    public void hited(Character material){
+    public void hited(Character Character){
 	System.out.println("hit in Material with argument Character");
     }
     //when hit
-    public void hited(Ballet material){
+    public void hited(Ballet Ballet){
 	System.out.println("hit in Material with argument Ballet");
     }
 }
