@@ -16,11 +16,6 @@ public class MaterialAdministrator{
     private ArrayList[] MaterialsEnemy = {Enemy,EnemyBallet};
     */
 
-    //管理対象となる物体群、Character:0,Ballet:1,Player属性
-    private ArrayList[] MaterialsPlayer = {new ArrayList<T>(),new ArrayList<T>()};
-    //Enemy属性
-    private ArrayList[] MaterialsEnemy = {new ArrayList<T>(),new ArrayList<T>()};
-
     /*
     //管理対象となる物体群、Character:0,Ballet:1,Player属性
     private ArrayList[] MaterialsPlayer = {new ArrayList(),new ArrayList()};
@@ -28,6 +23,13 @@ public class MaterialAdministrator{
     private ArrayList[] MaterialsEnemy = {new ArrayList(),new ArrayList()};
     //private ArrayList[] test={new ArrayList(),new ArrayList()};
     */
+
+
+
+    //管理対象となる物体群、Character:0,Ballet:1,Player属性
+    private ArrayList[] MaterialsPlayer = {new ArrayList(),new ArrayList()};
+    //Enemy属性
+    private ArrayList[] MaterialsEnemy = {new ArrayList(),new ArrayList()};
 
 
 
@@ -45,7 +47,7 @@ public class MaterialAdministrator{
     */
     //キャラを追加
     public void add(Character charactor){
-	System.out.println("add in Chara");
+	System.out.println("add Chara");
 	if(charactor.getIsEnemy()){
 	    MaterialsEnemy[0].add(charactor);
 	}else{
@@ -54,7 +56,7 @@ public class MaterialAdministrator{
     }
     //弾を追加。
     public void add(Ballet ballet){
-	System.out.println("add in Ballet");
+	System.out.println("add Ballet");
 	if(ballet.getIsEnemy()){
 	    MaterialsEnemy[1].add(ballet);
 	}else{
@@ -179,9 +181,61 @@ public class MaterialAdministrator{
     //XXX
     //そもそも9割方同じ動きをしているクラスが3つもあって見苦しい。一つにまとめたい。
     //キャストする必要性に迫られて3つある、最初からリストの型を決めてやればキャストせずに適切にオーバーロードが為されるのでは？
+    /*XXX delete
+    //管理対象となる物体群、Character:0,Ballet:1,Player属性
+    private ArrayList[] MaterialsPlayer = {new ArrayList(),new ArrayList()};
+    //Enemy属性
+    private ArrayList[] MaterialsEnemy = {new ArrayList(),new ArrayList()};
+     */
+
     public void checkCollision(){
+	checkCollision_CharaChara(MaterialsEnemy[0],MaterialsPlayer[0]);
+	checkCollision_CharaBallet(MaterialsEnemy[0],MaterialsPlayer[1]);
+	checkCollision_CharaBallet(MaterialsPlayer[0],MaterialsEnemy[1]);
+	checkCollision_BalletBallet(MaterialsEnemy[1],MaterialsPlayer[1]);
     }
 
+    //ここから下はうんこ
+    public void checkCollision_CharaBallet(ArrayList Characters,ArrayList Ballets){
+	for(int i=0;i<Characters.size();i++){
+	    Material CharacterMaterial = (Material)Characters.get(i);
+	    ManyHitters EnemyMH = CharacterMaterial.getManyHitters();
+	    for(int j=0;j<Ballets.size();j++){
+		Material BalletMaterial = (Material)Ballets.get(j);
+		ManyHitters BalletMH = BalletMaterial.getManyHitters();
+		if(EnemyMH.collisionCheck(BalletMH)){
+		    System.out.println("there is collision with Character & Ballet.");
+		}
+	    }
+	}
+    }
+    public void checkCollision_CharaChara(ArrayList Enemies,ArrayList Players){
+	for(int i=0;i<Enemies.size();i++){
+	    Material EnemyMaterial =(Material)Enemies.get(i);
+	    ManyHitters EnemyMH = EnemyMaterial.getManyHitters();
+	    for(int j=0;j<Players.size();j++){
+		Material PlayerMaterial = (Material)Players.get(j);
+		ManyHitters PlayerMH = PlayerMaterial.getManyHitters();
+		if(EnemyMH.collisionCheck(PlayerMH)){
+		    System.out.println("there is collision with EnemyCharacter & PlayerCharacter");
+		}
+	    }
+	}
+    }
+    public void checkCollision_BalletBallet(ArrayList EnemyBallets,ArrayList PlayerBallets){
+	for(int i=0;i<EnemyBallets.size();i++){
+	    Material EnemyMaterial = (Material)EnemyBallets.get(i);
+	    ManyHitters EnemyBalletsMH = EnemyMaterial.getManyHitters();
+	    for(int j=0;j<PlayerBallets.size();j++){
+		Material PlayerMaterial = (Material)PlayerBallets.get(j);
+		ManyHitters PlayerBalletsMH = PlayerMaterial.getManyHitters();
+		if(EnemyBalletsMH.collisionCheck(PlayerBalletsMH)){
+		    System.out.println("there is collision with EnemyBallet & PlayerBallet");
+		}
+	    }
+	}
+    }
+    //for debug
     public void checkTypeAll(){
 	for(int i=0;i<2;i++){
 	    checkType(MaterialsEnemy[i]);
@@ -199,22 +253,6 @@ public class MaterialAdministrator{
 	}
     }
 
-    //ここから下はうんこ
-    /*
-    public void checkCollision_CharaBallet(ArrayList Characters,ArrayList Ballets){
-	for(int i=0;i<Characters.size();i++){
-	    ManyHitters EnemyMH = (Characters.get(i)).getManyHitters();
-	    for(int j=0;j<Ballets.size();j++){
-		ManyHitters BalletMH = Ballets.get(j).getManyHitters();
-		if(EnemyMH.collisionCheck(BalletMH)){
-		    System.out.println("there is collision.");
-		}
-	    }
-	}
-    }
-    */
-    public void checkCollision_CharaChara(ArrayList Enemies,ArrayList Players){
-	
-    }
-    public void checkCollision_BalletBallet(ArrayList EnemyBallets,ArrayList PlayerBallets){}
+
+
 }
