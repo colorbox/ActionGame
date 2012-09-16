@@ -1,0 +1,4 @@
+public class TestEnemyBehaviorAdministrator{
+    private EnemyBehaviorAdministrator = new EnemyBehaviorAdministrator;
+
+}
