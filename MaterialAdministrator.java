@@ -205,6 +205,9 @@ public class MaterialAdministrator{
 		ManyHitters BalletMH = BalletMaterial.getManyHitters();
 		if(EnemyMH.collisionCheck(BalletMH)){
 		    System.out.println("there is collision with Character & Ballet.");
+		    //テストとして敵と弾を消してみる
+		    BalletMaterial.setVanish(true);
+		    CharacterMaterial.setVanish(true);
 		}
 	    }
 	}

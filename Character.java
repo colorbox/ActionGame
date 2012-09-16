@@ -9,6 +9,13 @@ public class Character extends Material{
 	super(x,y,rad,force,isEnemy);
     }
 
+    //死亡処理
+    public void deathOperation(){
+	if(getHP()<0){
+	    setVanish(true);
+	}
+    }
+
     //API群
     //API for Behavior
     public void neutral(){System.out.println("neutral");}
