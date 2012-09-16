@@ -7,12 +7,14 @@ public class Character extends Material{
     //コンストラクタ
     public Character(double x,double y,double rad,double force,boolean isEnemy){
 	super(x,y,rad,force,isEnemy);
+	setHP(3);
     }
 
     //死亡処理
     public void deathOperation(){
 	if(getHP()<0){
 	    setVanish(true);
+	    System.out.println(getHP());
 	}
     }
 
@@ -24,5 +26,12 @@ public class Character extends Material{
     public void jumpForward(){System.out.println("jumpForward");}
     public void jumpNeutral(){System.out.println("jumpNackward");}
     public void jumpBackward(){System.out.println("jumpNeutral");}
-    public void attack(){System.out.println("attack");}
+    public void attack(MaterialAdministrator ma){System.out.println("attack");}
+
+    //when hit
+    public void hitedBallet(Ballet Ballet){
+	System.out.println("hit in Character with argument Ballet");
+	setHP(getHP()-Ballet.getDamage());
+    }
+
 }

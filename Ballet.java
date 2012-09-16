@@ -5,10 +5,15 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class Ballet extends Material{
+    int Damage;
+
+    public void setDamage(int Damage){this.Damage=Damage;}
+    public int getDamage(){return Damage;}
 
     //コンストラクタ
     public Ballet(double x,double y,double rad,double force,boolean isEnemy){
 	super(x,y,rad,force,isEnemy);
+	setDamage(1);
 	setClassName("Ballet");
 
     }
@@ -38,17 +43,18 @@ public class Ballet extends Material{
 
     //when hitted
     //when hit
-    public void hited(Material material){
-	System.out.println("hit in Ballet with argument Material");
-    }
-    public void hited(Ballet ballet){
+    public void hitedBallet(Ballet ballet){
 	System.out.println("hit in Ballet with argument Ballet");
     }
-    public void hited(Enemy enemy){
+    public void hitedCharacter(Character Character){
 	System.out.println("hit in Ballet with argument Enemy");
+	setVanish(true);
     }
-    public void hited(Player player){
+
+    /*
+    public void hitedPlayer(Player player){
 	System.out.println("hit in Ballet with argument Player");
     }
+    */
 
 }

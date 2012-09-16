@@ -5,27 +5,6 @@ import java.awt.*;
 
 //Player属性とEnemy属性の物体を一元管理する。当たり判定が生じるのはPlayerとEnemy間のみなので、これでよいはず
 public class MaterialAdministrator{
-    /*
-    private ArrayList<Character> Player = new ArrayList<Character>();
-    private ArrayList<Character> Enemy = new ArrayList<Character>();
-    private ArrayList<Ballet> PlayerBallet = new ArrayList<Ballet>();
-    private ArrayList<Ballet> EnemyBallet = new ArrayList<Ballet>();
-    //管理対象となる物体群、Character:0,Ballet:1,Player属性
-    private ArrayList[] MaterialsPlayer = {Player,PlayerBallet};
-    //Enemy属性
-    private ArrayList[] MaterialsEnemy = {Enemy,EnemyBallet};
-    */
-
-    /*
-    //管理対象となる物体群、Character:0,Ballet:1,Player属性
-    private ArrayList[] MaterialsPlayer = {new ArrayList(),new ArrayList()};
-    //Enemy属性
-    private ArrayList[] MaterialsEnemy = {new ArrayList(),new ArrayList()};
-    //private ArrayList[] test={new ArrayList(),new ArrayList()};
-    */
-
-
-
     //管理対象となる物体群、Character:0,Ballet:1,Player属性
     private ArrayList[] MaterialsPlayer = {new ArrayList(),new ArrayList()};
     //Enemy属性
@@ -35,16 +14,7 @@ public class MaterialAdministrator{
 
     //コンストラクタ
     public MaterialAdministrator(){}
-    /*
-    public void add(Material material){
-	System.out.println("add in Material");
-	if(material.getIsEnemy()){
-	    MaterialsEnemy.add(material);
-	}else{
-	    MaterialsPlayer.add(material);
-	}
-    }
-    */
+
     //キャラを追加
     public void add(Character charactor){
 	System.out.println("add Chara");
@@ -67,14 +37,27 @@ public class MaterialAdministrator{
     //物体に関する全処理をこのメソッドで行う
     public void allOperation(Stage Stage,Graphics g){
 	checkCollision();
+	checkDeathAll();
 	checkVanish();
 	allMove();
 	allRevision(Stage);
 	allDrawMove(Stage.getX(),Stage.getY());
 	allDraw(g);
-	checkCollision();
     }
 
+    //物体リストに適用できる死亡フラグ調査
+    private void checkDeathPrim(ArrayList CharacterList){
+	for(int i=0;i<CharacterList.size();i++){
+	    Character Character = (Character)CharacterList.get(i);
+	    Character.deathOperation();
+	}
+    }
+
+    //死亡フラグ調査
+    public void checkDeathAll(){
+	checkDeathPrim(MaterialsEnemy[0]);
+	checkDeathPrim(MaterialsPlayer[0]);
+    }
 
     //物体リストに適用できる削除
     private void checkVanishPrim(ArrayList list){
@@ -85,6 +68,7 @@ public class MaterialAdministrator{
 	    }
 	}
     }
+
     //物体リストから、消滅した物体を削除する
     public void checkVanish(){
 	for(int i=0;i<2;i++){
@@ -198,26 +182,27 @@ public class MaterialAdministrator{
     //ここから下はうんこ
     public void checkCollision_CharaBallet(ArrayList Characters,ArrayList Ballets){
 	for(int i=0;i<Characters.size();i++){
-	    Material CharacterMaterial = (Material)Characters.get(i);
+	    Character CharacterMaterial = (Character)Characters.get(i);
 	    ManyHitters EnemyMH = CharacterMaterial.getManyHitters();
 	    for(int j=0;j<Ballets.size();j++){
-		Material BalletMaterial = (Material)Ballets.get(j);
+		Ballet BalletMaterial = (Ballet)Ballets.get(j);
 		ManyHitters BalletMH = BalletMaterial.getManyHitters();
 		if(EnemyMH.collisionCheck(BalletMH)){
 		    System.out.println("there is collision with Character & Ballet.");
-		    //テストとして敵と弾を消してみる
-		    BalletMaterial.setVanish(true);
-		    CharacterMaterial.setVanish(true);
+		    //弾側の処理
+		    BalletMaterial.hitedCharacter(CharacterMaterial);
+		    //キャラ側の処理
+		    CharacterMaterial.hitedBallet(BalletMaterial);
 		}
 	    }
 	}
     }
     public void checkCollision_CharaChara(ArrayList Enemies,ArrayList Players){
 	for(int i=0;i<Enemies.size();i++){
-	    Material EnemyMaterial =(Material)Enemies.get(i);
+	    Character EnemyMaterial =(Character)Enemies.get(i);
 	    ManyHitters EnemyMH = EnemyMaterial.getManyHitters();
 	    for(int j=0;j<Players.size();j++){
-		Material PlayerMaterial = (Material)Players.get(j);
+		Character PlayerMaterial = (Character)Players.get(j);
 		ManyHitters PlayerMH = PlayerMaterial.getManyHitters();
 		if(EnemyMH.collisionCheck(PlayerMH)){
 		    System.out.println("there is collision with EnemyCharacter & PlayerCharacter");
@@ -227,10 +212,10 @@ public class MaterialAdministrator{
     }
     public void checkCollision_BalletBallet(ArrayList EnemyBallets,ArrayList PlayerBallets){
 	for(int i=0;i<EnemyBallets.size();i++){
-	    Material EnemyMaterial = (Material)EnemyBallets.get(i);
+	    Ballet EnemyMaterial = (Ballet)EnemyBallets.get(i);
 	    ManyHitters EnemyBalletsMH = EnemyMaterial.getManyHitters();
 	    for(int j=0;j<PlayerBallets.size();j++){
-		Material PlayerMaterial = (Material)PlayerBallets.get(j);
+		Ballet PlayerMaterial = (Ballet)PlayerBallets.get(j);
 		ManyHitters PlayerBalletsMH = PlayerMaterial.getManyHitters();
 		if(EnemyBalletsMH.collisionCheck(PlayerBalletsMH)){
 		    System.out.println("there is collision with EnemyBallet & PlayerBallet");

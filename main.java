@@ -7,7 +7,7 @@ public class main extends Applet implements Runnable,KeyListener{
     //物体管理者
     MaterialAdministrator ma = new MaterialAdministrator();
     //敵の振る舞い管理
-    EnemyBehaviorAdministrator EnemyBehaviorAdministrator = new EnemyBehaviorAdministrator();
+    EnemyBehaviorAdministrator EnemyBehaviorAdministrator = new EnemyBehaviorAdministrator(ma);
     //オフスクリーンバッファのグラフィックコンテキスト
     Graphics gBuf;
     Image imgBuf;
@@ -35,7 +35,7 @@ public class main extends Applet implements Runnable,KeyListener{
 	//Player init
 	Player = new Player(200.0,200.0,0.0,0.0,StageData.getStageWidth(),StageData.getStageHeight());
 
-	//set Player's behaviorXXX(Characterのコンストラクタと一緒にいじる)
+	//set Player's behavior
 	Player.setPlayerBehavior(PlayerBehavior);
 
 	//バッファ生成
@@ -90,9 +90,8 @@ public class main extends Applet implements Runnable,KeyListener{
 	    //背景画像をバッファに描画
 	    gBuf.drawImage(imgBack, 0, 0, this);
 
-	    //自機の操作XXX(Characterのコンストラクタと一緒にいじる)
+	    //自機の操作
 	    Player.getPlayerBehavior().playerMoveBehavior(Controller,Player,ma);
-
 	    //敵の振る舞い
 	    EnemyBehaviorAdministrator.enemiesBehavior(Timer.getTime());
 

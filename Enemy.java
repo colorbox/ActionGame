@@ -27,18 +27,21 @@ public class Enemy extends Character{
     public void jumpForward(){}
     public void jumpNeutral(){}
     public void jumpBackward(){}
-    public void attack(){}
+    public void attack(MaterialAdministrator ma){
+	ma.add(new Ballet(getX(),getY(),-1.6,15.0,true));
+    }
 
     //when hit
-    public void hited(Player Player){
+    public void hitedPlayer(Player Player){
 	System.out.println("hit in Enemy with argument Player");
     }
     public void hited(Material Material){
 	System.out.println("hit in Enemy with argument Material");
     }
     //when hit
-    public void hited(Ballet Ballet){
-	System.out.println("hit in Enemy with argument Ballet");
+    public void hitedBallet(Ballet Ballet){
+	System.out.println("hit in Enemy("+getHP()+") with argument Ballet("+Ballet.getDamage()+")");
+	setHP(getHP()-Ballet.getDamage());
     }
 
 }
