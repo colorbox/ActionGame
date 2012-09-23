@@ -1,6 +1,10 @@
 //どんな動きをするのかはPlayerに全て記述し、Behaviorはそれを呼び出す形で動作させる。PlayerのAPI的なものを作るという事ではなかろーか
-public class PlayerBehavior{
+public class PlayerBehavior extends Behavior{
     //プレイヤーの振る舞い、移動時
+    
+    public void behaviorMove(Controller Controller,Character Player,MaterialAdministrator ma){
+	playerMoveBehavior(Controller,Player,ma);
+    }
     public void playerMoveBehavior(Controller Controller,Character Player,MaterialAdministrator ma){
 	//スティック操作
 	int stick = Controller.getStick();

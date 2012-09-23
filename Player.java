@@ -5,11 +5,13 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class Player extends Character{
+    /*
     private PlayerBehavior playerbehavior;
     public void setPlayerBehavior(PlayerBehavior playerbehavior){this.playerbehavior=playerbehavior;}
     public PlayerBehavior getPlayerBehavior(){return playerbehavior;}
-
+    */
     
+
     //Stage Data
     private int StageWidth=0,StageHeight=0;
     //砲台
@@ -26,12 +28,12 @@ public class Player extends Character{
     public Pointer getCannon(){return Cannon;}
 
     //コンストラクタ
-    public Player(double x,double y,double rad,double force,int StageWidth,int StageHeight){
+    public Player(double x,double y,double rad,double force,int StageWidth,int StageHeight,Behavior behavior){
 	super(x,y,rad,force,false);
 	Cannon=new Pointer(rad,force);
 	setStageWidth(StageWidth);
 	setStageHeight(StageHeight);
-	setClassName("Player");
+	setBehavior(behavior);
     }
 
     public void neutral(){

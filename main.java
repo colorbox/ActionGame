@@ -6,8 +6,6 @@ import java.awt.event.*;
 public class main extends Applet implements Runnable,KeyListener{
     //物体管理者
     MaterialAdministrator ma = new MaterialAdministrator();
-    //敵の振る舞い管理
-    EnemyBehaviorAdministrator EnemyBehaviorAdministrator = new EnemyBehaviorAdministrator(ma);
     //オフスクリーンバッファのグラフィックコンテキスト
     Graphics gBuf;
     Image imgBuf;
@@ -17,8 +15,6 @@ public class main extends Applet implements Runnable,KeyListener{
     Player Player;
     //コントローラー
     Controller Controller =new Controller();
-    //振る舞い
-    PlayerBehavior PlayerBehavior = new PlayerBehavior();
     //タイマー
     Timer Timer = new Timer(0);
     //CSVReader
@@ -33,11 +29,7 @@ public class main extends Applet implements Runnable,KeyListener{
 	this.width = dimension.width;
 	this.height = dimension.height;
 	//Player init
-	Player = new Player(200.0,200.0,0.0,0.0,StageData.getStageWidth(),StageData.getStageHeight());
-
-	//set Player's behavior
-	Player.setPlayerBehavior(PlayerBehavior);
-
+	Player = new Player(200.0,200.0,0.0,0.0,StageData.getStageWidth(),StageData.getStageHeight(),new PlayerBehavior());
 	//バッファ生成
 	imgBuf = createImage(width, height);
 	//グラフィックコンテキスト取得
@@ -48,12 +40,8 @@ public class main extends Applet implements Runnable,KeyListener{
 	//test enemy
 	Enemy enemy = new Enemy(100,100,0.0,0.0);
 
-
 	//物体管理者の敵追加
 	ma.add(enemy);
-	//振る舞い管理に敵を追加
-	EnemyBehaviorAdministrator.add(enemy);
-
 	//Player追加
 	ma.add(Player);
     }
@@ -64,7 +52,6 @@ public class main extends Applet implements Runnable,KeyListener{
 	StageData.draw(g);
     }
 
-
     //アプレットが表示されると呼び出される
     public void start(){
 	if(thread == null){
@@ -74,6 +61,7 @@ public class main extends Applet implements Runnable,KeyListener{
 	    thread.start();
 	}
     }
+
     //メインルーチン
     public void run(){
 	//描写領域の生成
@@ -90,17 +78,11 @@ public class main extends Applet implements Runnable,KeyListener{
 	    //背景画像をバッファに描画
 	    gBuf.drawImage(imgBack, 0, 0, this);
 
-	    //自機の操作
-	    Player.getPlayerBehavior().playerMoveBehavior(Controller,Player,ma);
-	    //敵の振る舞い
-	    EnemyBehaviorAdministrator.enemiesBehavior(Timer.getTime());
-
 	    //stage camera move 
 	    StageData.move((int)Player.getX(),(int)Player.getY());
 
-
 	    //物体管理者の物体管理
-	    ma.allOperation(StageData,gBuf);
+	    ma.allOperation(StageData,gBuf,Controller,Timer.getTime());
 
 	    //画面の強制更新
 	    repaint();
@@ -111,7 +93,6 @@ public class main extends Applet implements Runnable,KeyListener{
 	    //グラフィックコンテキスト破棄
 	    gBack.dispose();
 
-
 	    try{
 		//0.016秒間(約1フレーム)スリープ。これを忘れるとハングアップする
 		Thread.sleep(17);
@@ -119,6 +100,7 @@ public class main extends Applet implements Runnable,KeyListener{
 	    }catch(InterruptedException e) {}
 	}
     }
+
     //オーバーライドして最低限のことだけをする
     public void update(Graphics g){
 	paint(g);
@@ -127,12 +109,14 @@ public class main extends Applet implements Runnable,KeyListener{
 	//バッファを画面に描画
 	g.drawImage(imgBuf, 0, 0, this);
     }
+
     //アプレットが画面から消えると呼び出される
     public void stop(){
 	if(thread != null){
 	    thread = null;
 	}
     }
+
     //キー押下時
     public void keyPressed(KeyEvent e){
 	Controller.keyPressed(e,Timer.getTime());

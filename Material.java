@@ -35,7 +35,6 @@ public class Material extends DrawObject{
     public boolean getIsEnemy(){return isEnemy;}
     public ManyHitters getManyHitters(){return manyhitters;}
     public Sensor getSensor(){return Sensor;}
-    public String getClassName(){return ClassName;}
 
     //setter
     public void setForce(double ForcePower){this.Vector.setForce(ForcePower);}
@@ -45,7 +44,6 @@ public class Material extends DrawObject{
     public void setY(double y){this.y=y;}
     public void setVanish(boolean Vanish){this.Vanish=Vanish;}
     public void setIsEnemy(boolean isEnemy){this.isEnemy=isEnemy;}
-    public void setClassName(String ClassName){this.ClassName=ClassName;}
 
     //コンストラクタ
     public Material(double x,double y,double rad,double force,boolean isEnemy){
@@ -55,7 +53,6 @@ public class Material extends DrawObject{
 	this.Vector=new Pointer(rad,force);
 	setIsEnemy(isEnemy);
 	manyhitters.add(new Hitter(8,8,0,0,5));
-	setClassName("Material");
     }
 
     //あたり範囲を追加

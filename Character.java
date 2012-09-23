@@ -1,4 +1,10 @@
 public class Character extends Material{
+    //character's behavior
+    private Behavior behavior;
+    public void setBehavior(Behavior behavior){this.behavior=behavior;}
+    public Behavior getBehavior(){return behavior;}
+
+
     //HP
     private int HP;
     //getter/setter

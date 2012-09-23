@@ -2,6 +2,9 @@
 //Characterのクラスにベタ書きされるのは基本的な動作。Behaviorにはそれらの組み合わせを記述する。
 public class Behavior{
     public Behavior(){}
+
+    public void playerMoveBehavior(Controller Controller,Character Player,MaterialAdministrator ma){}
+
     public void behaviorMove(int Time,Character Character,MaterialAdministrator ma){
 	if(Character.getLanding()){
 	    if(Time%120 <60){

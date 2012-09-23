@@ -1,14 +1,15 @@
 public class Enemy extends Character{
+    /*
     //character's behavior
     private Behavior behavior;
     public void setBehavior(Behavior behavior){this.behavior=behavior;}
     public Behavior getBehavior(){return behavior;}
+    */
 
 
     public Enemy(double x,double y,double rad,double force){
 	super(x,y,rad,force,true);
 	setBehavior(new Behavior());
-	setClassName("Enemy");
     }
 
     //API for Behavior

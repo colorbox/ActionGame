@@ -10,8 +10,6 @@ public class MaterialAdministrator{
     //Enemy属性
     private ArrayList[] MaterialsEnemy = {new ArrayList(),new ArrayList()};
 
-
-
     //コンストラクタ
     public MaterialAdministrator(){}
 
@@ -35,14 +33,28 @@ public class MaterialAdministrator{
     }
 
     //物体に関する全処理をこのメソッドで行う
-    public void allOperation(Stage Stage,Graphics g){
+    public void allOperation(Stage Stage,Graphics g,Controller controller,int Time){
 	checkCollision();
 	checkDeathAll();
 	checkVanish();
+	behaviorOperation(controller,Time);
 	allMove();
 	allRevision(Stage);
 	allDrawMove(Stage.getX(),Stage.getY());
 	allDraw(g);
+    }
+
+
+    public void behaviorOperation(Controller controller,int Time){
+	//player
+	Player player = (Player)MaterialsPlayer[0].get(0);
+	player.getBehavior().playerMoveBehavior(controller,player,this);
+
+	//enemy
+	for(int i=0;i<MaterialsEnemy[0].size();i++){
+	    Enemy enemy = (Enemy)MaterialsEnemy[0].get(i);
+	    enemy.getBehavior().moveAndAttack(Time,enemy,this);
+	}
     }
 
     //物体リストに適用できる死亡フラグ調査
