@@ -45,10 +45,13 @@ public class MaterialAdministrator{
     }
 
 
+
     public void behaviorOperation(Controller controller,int Time){
 	//player
-	Player player = (Player)MaterialsPlayer[0].get(0);
-	player.getBehavior().playerMoveBehavior(controller,player,this);
+	for(int i=0;i<MaterialsPlayer[0].size();i++){
+	    Player player = (Player)MaterialsPlayer[0].get(i);
+	    player.getBehavior().playerMoveBehavior(controller,player,this);
+	}
 
 	//enemy
 	for(int i=0;i<MaterialsEnemy[0].size();i++){

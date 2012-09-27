@@ -10,7 +10,8 @@ public class Sensor{
     //着天井しているか
     private boolean Roofing;
     //上下左右のセンサを宣言
-    private SensorDot[] SensorDots = new  SensorDot[8];
+    private SensorDot[] SensorDots = new SensorDot[8];
+    private int Width,Height;
 
     //コンストラクタ
     public Sensor(int x,int y){
@@ -24,27 +25,35 @@ public class Sensor{
     public void setWallingLeft(boolean WallingLeft){this.WallingLeft=WallingLeft;}
     public void setWallingRight(boolean WallingRight){this.WallingRight=WallingRight;}
     public void setRoofing(boolean Roofing){this.Roofing=Roofing;}
+    public void setWidth(int Width){this.Width=Width;}
+    public void setHeight(int Height){this.Height=Height;}
 
     //getter
     public boolean getLanding(){return Landing;}
     public boolean getWallingRight(){return WallingRight;}
     public boolean getWallingLeft(){return WallingLeft;}
     public boolean getRoofing(){return Roofing;}
+    public int getWidth(){return Width;}
+    public int getHeight(){return Height;}
 
     //パラメータセット
     public void setParam(int x,int y){
+	int up = (int)(getHeight()/4);
+	int down = (int)(getHeight() - up);
+	int left = (int)(getWidth()/4);
+	int right = (int)(getWidth()-left);
 	//Up
-	SensorDots[0].setParam(x+ 4,y-1);
-	SensorDots[1].setParam(x+12,y-1);
+	SensorDots[0].setParam(x+  left,y-1);
+	SensorDots[1].setParam(x+ right,y-1);
 	//Down
-	SensorDots[2].setParam(x+ 4,y+16);
-	SensorDots[3].setParam(x+12,y+16);
+	SensorDots[2].setParam(x+  left,y+getHeight());
+	SensorDots[3].setParam(x+ right,y+getHeight());
 	//Left
-	SensorDots[4].setParam(x-1,y+ 4);
-	SensorDots[5].setParam(x-1,y+12);
+	SensorDots[4].setParam(x-1,y+ up);
+	SensorDots[5].setParam(x-1,y+ down);
 	//Right
-	SensorDots[6].setParam(x+16,y+ 4);
-	SensorDots[7].setParam(x+16,y+12);
+	SensorDots[6].setParam(x+getWidth(),y+ up);
+	SensorDots[7].setParam(x+getWidth(),y+ down);
     }
 
     //move sensor dot draw coordinate

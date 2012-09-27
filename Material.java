@@ -5,12 +5,12 @@ import java.applet.Applet;
 
 //ゲームにおける物体のスーパークラス
 public class Material extends DrawObject{
-    //クラス名(おおまかな分類、Enemy,Ballet,Player,Material)
-    private String ClassName;
     //敵フラグ
     private boolean isEnemy;
     //重力
     public Pointer Gravity = new Pointer(Math.PI/2,0.5);
+    //消滅フラグ
+    private boolean Vanish=false;
     //1度の角度
     private static double rad1 = Math.PI/180;
     //座標計算用
@@ -21,8 +21,10 @@ public class Material extends DrawObject{
     protected Sensor Sensor=new Sensor(0,0);
     //当たり範囲群
     private ManyHitters manyhitters = new ManyHitters();
-    //消滅フラグ
-    private boolean Vanish=false;
+    //flying object flag
+    private boolean Flying;
+    //Material's Size
+    private int Width,Height;
 
     //getter
     public double getForce(){return Vector.getForce();}
@@ -35,6 +37,9 @@ public class Material extends DrawObject{
     public boolean getIsEnemy(){return isEnemy;}
     public ManyHitters getManyHitters(){return manyhitters;}
     public Sensor getSensor(){return Sensor;}
+    public boolean getFlying(){return Flying;}
+    public int getWidth(){return this.Sensor.getWidth();}
+    public int getHeight(){return this.Sensor.getHeight();}
 
     //setter
     public void setForce(double ForcePower){this.Vector.setForce(ForcePower);}
@@ -44,6 +49,9 @@ public class Material extends DrawObject{
     public void setY(double y){this.y=y;}
     public void setVanish(boolean Vanish){this.Vanish=Vanish;}
     public void setIsEnemy(boolean isEnemy){this.isEnemy=isEnemy;}
+    public void setFlying(boolean flying){this.Flying = flying;}
+    public void setWidth(int Width){this.Sensor.setWidth(Width);}
+    public void setHeight(int Height){this.Sensor.setHeight(Height);}
 
     //コンストラクタ
     public Material(double x,double y,double rad,double force,boolean isEnemy){
@@ -53,6 +61,9 @@ public class Material extends DrawObject{
 	this.Vector=new Pointer(rad,force);
 	setIsEnemy(isEnemy);
 	manyhitters.add(new Hitter(8,8,0,0,5));
+	setFlying(false);
+	setWidth(16);
+	setHeight(16);
     }
 
     //あたり範囲を追加
@@ -117,8 +128,8 @@ public class Material extends DrawObject{
 
     //物理的移動
     public void materialMove(){
-	//重力による補正、自由落下状態なら重力の影響を受ける
-	if(!Sensor.getLanding()){
+	//重力による補正、飛行状態でなく自由落下状態なら重力の影響を受ける
+	if(!Sensor.getLanding() && !getFlying()){
 	    this.Vector.vectorCombination(Gravity);
 	}
 	//物理ベクトルに基づく移動

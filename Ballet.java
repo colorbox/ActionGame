@@ -14,6 +14,9 @@ public class Ballet extends Material{
     public Ballet(double x,double y,double rad,double force,boolean isEnemy){
 	super(x,y,rad,force,isEnemy);
 	setDamage(1);
+	setFlying(true);
+	setWidth(8);
+	setHeight(8);
     }
     //Balletは弾、弾なので、飛んで行ったり当たり判定のための範囲が設定されてる、
     //でも壁に当たると消えたりする処理が必要。

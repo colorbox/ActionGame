@@ -17,9 +17,10 @@ public class Behavior{
 
     public void moveAndAttack(int Time,Character Character,MaterialAdministrator ma){
 	if(Character.getLanding()){
-	    if(Time%60 < 30){
+	    int Schedule=Time%61;
+	    if(Schedule < 30){
 		Character.moveForward();
-	    }else if(Time%60==30){
+	    }else if(Schedule==30){
 		Character.neutral();
 		Character.attack(ma);
 	    }else{
