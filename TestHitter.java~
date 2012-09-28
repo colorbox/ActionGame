@@ -1,9 +1,0 @@
-public class TestHitter{
-    public static void main(String[] args){
-	Hitter hitter= new Hitter(0,0,1,1,2);
-	Hitter target= new Hitter(0,0,2,1,1);
-	System.out.println("(0,0,1,1,2):(0,0,2,1,2):"+hitter.collisionJudge(target));
-	//target.setParam(10,10,9);
-	//System.out.println(hitter.collisionJudge(target));
-    }
-}

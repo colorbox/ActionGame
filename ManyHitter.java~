@@ -1,6 +1,0 @@
-import java.util.*;
-
-public class ManyHitter{
-    private ArrayList Hitters = new ArrayList();
-    
-}
