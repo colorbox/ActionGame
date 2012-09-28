@@ -23,8 +23,8 @@ public class SensorDot extends DrawObject{
 
     //xとyを入力
     public void setParam(int x,int y){
-	this.x=x;
-	this.y=y;
+	setX(x);
+	setY(y);
     }
 
     //センサがオブジェクト内にいるかどうか判定

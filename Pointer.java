@@ -2,7 +2,10 @@ import java.lang.Math;
 import java.awt.*;
 import java.applet.Applet;
 
+
 public class Pointer{
+    //limit of gravity
+    private static double GravityLimit = 7.0;
     //1度の角度
     private static double rad1 = Math.PI/180;
     //ベクトルの角度
@@ -11,13 +14,15 @@ public class Pointer{
     private double Force;
 
     //getter,setter
-    public double getForce(){return Force;}
+    public double getForce(){
+	return Force;
+    }
     public double getRad(){return Rad;}
 
     //力のセット
     public void setForce(double Force){
 	this.Force=Force;
-	ForceRevision();
+	forceRevision();
     }
 
     //角度のセット(double)
@@ -33,16 +38,18 @@ public class Pointer{
 
     //コンストラクタ
     public Pointer(double Rad,double Force){
-	this.Rad=Rad;
-	this.Force=Force;
+	setRad(Rad);
+	setForce(Force);
+	forceRevision();
     }
 
     //力補正(+15.0〜-15.0)
-    private void ForceRevision(){
-	if(getForce()>15.0){
-	    setForce(15.0);
-	}else if(getForce()<-15.0){
-	    setForce(-15.0);
+    private void forceRevision(){
+	//System.out.println(getForce());
+	if(getForce()>GravityLimit){
+	    setForce(GravityLimit);
+	}else if(getForce()<-1*GravityLimit){
+	    setForce(-1*GravityLimit);
 	}
     }
 
@@ -75,8 +82,8 @@ public class Pointer{
 
     //パラメータセット
     public void setParam(double Rad,double Force){
-	this.Rad=Rad;
-	this.Force=Force;
+	setRad(Rad);
+	setForce(Force);
     }
 
     //描写

@@ -85,8 +85,8 @@ public class Player extends Character{
 	pX=(int)getDrawX();
 	pY=(int)getDrawY();
        	Cannon.draw(g,pX,pY);
-	g.drawRect(pX,pY,15,15);
-	g.drawRect(pX+1,pY+1,13,13);
+	g.drawRect(pX,pY,getWidth(),getHeight());
+	g.drawRect(pX+1,pY+1,getWidth()-2,getHeight()-2);
 	//センサの描写
 	Sensor.draw(g);
 	materialDraw(g);

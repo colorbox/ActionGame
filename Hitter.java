@@ -81,7 +81,7 @@ public class Hitter extends DrawObject{
 
     //描写
     public void draw(Graphics g){
-	g.setColor(Color.red);
+	g.setColor(Color.gray);
 	//g.fillOval((getX()+(relativeX-radius)),(getY()+(relativeY-radius)),2*radius,2*radius);
 
 	g.fillOval((getDrawX()+(relativeX-radius)),(getDrawY()+(relativeY-radius)),2*radius,2*radius);

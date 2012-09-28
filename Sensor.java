@@ -65,7 +65,7 @@ public class Sensor{
 
     //全方向用の状態検査
     private boolean isInsideForAllDirection(int index1,int index2){
-	if(SensorDots[index1].getInside() && SensorDots[index2].getInside()){
+	if(SensorDots[index1].getInside() || SensorDots[index2].getInside()){
 	    return true;
 	}else{
 	    return false;

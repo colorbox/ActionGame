@@ -56,14 +56,14 @@ public class Material extends DrawObject{
     //コンストラクタ
     public Material(double x,double y,double rad,double force,boolean isEnemy){
 	super((int)x,(int)y);
-	this.x=x;
-	this.y=y;
+	setX(x);
+	setY(y);
 	this.Vector=new Pointer(rad,force);
 	setIsEnemy(isEnemy);
-	manyhitters.add(new Hitter(8,8,0,0,5));
+	setWidth(8);
+	setHeight(8);
+	manyhitters.add(new Hitter(getWidth()/2,getHeight()/2,(int)getX(),(int)getY(),3));
 	setFlying(false);
-	setWidth(16);
-	setHeight(16);
     }
 
     //あたり範囲を追加
@@ -76,18 +76,18 @@ public class Material extends DrawObject{
 	//左方向のベクトルを除去
 	//Vector.verticleExtractRight();
 	//X座標を補正
-	setX( (int)getX() + 15 - (int)(getX()-1)%16 );
+	setX( (int)getX() + getWidth()-1 - (int)(getX()-1)%getWidth() );
 	//センサを更新
 	Sensor.updateCoordinate(Stage,(int)getX(),(int)getY());
     }
 
-    //右
+    //接壁処理右
     public void wallingRightOperation(Stage Stage){
 	//左右どちらかのセンサがオブジェクト内部に合ったら接壁状態
 	//ベクトルの右方向成分を除去
 	//Vector.verticleExtractLeft();
 	//座標を補正
-	setX( (int)getX() - (int)(getX())%16 );
+	setX( (int)getX() - (int)(getX())%getWidth() );
 	//センサを更新
 	Sensor.updateCoordinate(Stage,(int)getX(),(int)getY());
 
@@ -98,7 +98,7 @@ public class Material extends DrawObject{
 	//ベクトルの上方向成分を除去
 	Vector.sideExtractDown();
 	//座標をオブジェクトの下に固定
-	setY( (int)getY() + 15 - (int)(getY()-1)%16) ;
+	setY( (int)getY() + getHeight()-1 - (int)(getY()-1)%getHeight()) ;
 	//センサを更新
 	Sensor.updateCoordinate(Stage,(int)getX(),(int)getY());
     }
@@ -110,7 +110,7 @@ public class Material extends DrawObject{
 	setForce(0.0);
 	setRad(0.0);
 	//座標をオブジェクトの上に固定する
-	setY( ( (int)getY() - (int)(getY())%16 ) );
+	setY( ( (int)getY() - (int)(getY())%getHeight() ) );
 	//センサの値を更新
 	Sensor.updateCoordinate(Stage,(int)getX(),(int)getY());
     }
@@ -188,7 +188,9 @@ public class Material extends DrawObject{
 
     //描写
     public void draw(Graphics g){
-	g.fillOval(getDrawX(),getDrawY(),15,15);
+	g.setColor(Color.red);
+	
+	g.fillOval(getDrawX(),getDrawY(),getWidth()-1,getHeight()-1);
 	//g.fillOval((int)x,(int)y,15,15);
 	materialDraw(g);
     }
