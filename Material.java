@@ -40,6 +40,8 @@ public class Material extends DrawObject{
     public boolean getFlying(){return Flying;}
     public int getWidth(){return this.Sensor.getWidth();}
     public int getHeight(){return this.Sensor.getHeight();}
+    public double getGravityLimit(){return this.Vector.getGravityLimit();}
+
 
     //setter
     public void setForce(double ForcePower){this.Vector.setForce(ForcePower);}
@@ -52,6 +54,12 @@ public class Material extends DrawObject{
     public void setFlying(boolean flying){this.Flying = flying;}
     public void setWidth(int Width){this.Sensor.setWidth(Width);}
     public void setHeight(int Height){this.Sensor.setHeight(Height);}
+    public void setGravityLimit(double GravityLimit){this.Vector.setGravityLimit(GravityLimit);}
+    public void setSize(int size){
+	setWidth(size);
+	setHeight(size);
+    }
+
 
     //コンストラクタ
     public Material(double x,double y,double rad,double force,boolean isEnemy){
@@ -60,8 +68,7 @@ public class Material extends DrawObject{
 	setY(y);
 	this.Vector=new Pointer(rad,force);
 	setIsEnemy(isEnemy);
-	setWidth(8);
-	setHeight(8);
+	setSize(8);
 	manyhitters.add(new Hitter(getWidth()/2,getHeight()/2,(int)getX(),(int)getY(),3));
 	setFlying(false);
     }

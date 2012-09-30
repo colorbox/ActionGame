@@ -10,6 +10,9 @@ public class Enemy extends Character{
     public Enemy(double x,double y,double rad,double force){
 	super(x,y,rad,force,true);
 	setBehavior(new Behavior());
+	setWidth(4);
+	setHeight(4);
+	setGravityLimit(4);
     }
 
     //API for Behavior

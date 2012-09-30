@@ -43,17 +43,18 @@ public class Sensor{
 	int left = (int)(getWidth()/4);
 	int right = (int)(getWidth()-left);
 	//Up
-	SensorDots[0].setParam(x+  left,y-1);
-	SensorDots[1].setParam(x+ right,y-1);
+	SensorDots[0].setParam(x+  left,y);
+	SensorDots[1].setParam(x+ right,y);
 	//Down
 	SensorDots[2].setParam(x+  left,y+getHeight());
 	SensorDots[3].setParam(x+ right,y+getHeight());
 	//Left
-	SensorDots[4].setParam(x-1,y+ up);
-	SensorDots[5].setParam(x-1,y+ down);
+	SensorDots[4].setParam(x,y+ up);
+	SensorDots[5].setParam(x,y+ down);
 	//Right
 	SensorDots[6].setParam(x+getWidth(),y+ up);
 	SensorDots[7].setParam(x+getWidth(),y+ down);
+
     }
 
     //move sensor dot draw coordinate

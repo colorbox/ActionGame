@@ -5,7 +5,7 @@ import java.applet.Applet;
 
 public class Pointer{
     //limit of gravity
-    private static double GravityLimit = 7.0;
+    private double GravityLimit = 7.0;
     //1度の角度
     private static double rad1 = Math.PI/180;
     //ベクトルの角度
@@ -13,12 +13,12 @@ public class Pointer{
     //ベクトルの大きさ
     private double Force;
 
-    //getter,setter
-    public double getForce(){
-	return Force;
-    }
+    //getter
+    public double getGravityLimit(){return GravityLimit;}
+    public double getForce(){return Force;}
     public double getRad(){return Rad;}
 
+    //setter
     //力のセット
     public void setForce(double Force){
 	this.Force=Force;
@@ -35,6 +35,7 @@ public class Pointer{
 	this.Rad=Rad*rad1;
 	this.radRevision();
     }
+    public void setGravityLimit(double GravityLimit){this.GravityLimit=GravityLimit;}
 
     //コンストラクタ
     public Pointer(double Rad,double Force){

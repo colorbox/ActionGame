@@ -27,6 +27,8 @@ public class Player extends Character{
 	setStageWidth(StageWidth);
 	setStageHeight(StageHeight);
 	setBehavior(behavior);
+	setSize(16);
+	setGravityLimit(16);
     }
 
     public void neutral(){
