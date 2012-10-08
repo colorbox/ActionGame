@@ -92,6 +92,7 @@ public class Player extends Character{
 	//センサの描写
 	Sensor.draw(g);
 	materialDraw(g);
+	getManyHitters().draw(g);
 
     }
 

@@ -11,10 +11,6 @@ public class main extends Applet implements Runnable,KeyListener{
     //イメージ
     Image imgBuf;
 
-    //描写領域の生成
-    Image imgBack;
-    //グラフィック生成
-    Graphics gBack;
 
 
     Thread thread = null;
@@ -46,11 +42,11 @@ public class main extends Applet implements Runnable,KeyListener{
 	Player = new Player(200.0,200.0,0.0,0.0,StageData.getStageWidth(),StageData.getStageHeight(),new PlayerBehavior());
 	//test enemy
 	Enemy enemy = new Enemy(100,100,0.0,0.0);
-
 	//Player追加
 	ma.add(Player);
 	//物体管理者の敵追加
 	ma.add(enemy);
+
     }
 
     //背景イメージ描画メソッド
@@ -79,10 +75,8 @@ public class main extends Applet implements Runnable,KeyListener{
 
 	    //update Background image
 	    drawBackImage(gBuf);
-
 	    //stage camera move 
 	    StageData.move((int)Player.getX(),(int)Player.getY());
-
 	    //物体管理者の物体管理
 	    ma.allOperation(StageData,gBuf,Controller,Timer.getTime());
 
@@ -92,8 +86,6 @@ public class main extends Applet implements Runnable,KeyListener{
 	    //コントローラーの値を全てリセット
 	    Controller.buttonReset();
 
-	    //グラフィックコンテキスト破棄
-	    gBuf.dispose();
 
 	    try{
 		//0.016秒間(約1フレーム)スリープ。これを忘れるとハングアップする

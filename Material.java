@@ -154,6 +154,7 @@ public class Material extends DrawObject{
     public void drawMove(int StageX,int StageY){
 	//描写座標の調整
 	updateDrawCoordinate(StageX,StageY,(int)getX(),(int)getY());
+	//XXX ここに、当たり判定とセンサーの座標を更新する処理を？それとも
 	//move Draw Coordinate for Hitter
 	getManyHitters().moveDrawCoordinate(StageX,StageY);
 	//move Draw Coordinate for SensorDots
@@ -195,11 +196,12 @@ public class Material extends DrawObject{
 
     //描写
     public void draw(Graphics g){
-	g.setColor(Color.red);
+	g.setColor(Color.gray);
 	
-	g.fillOval(getDrawX(),getDrawY(),getWidth()-1,getHeight()-1);
+	//g.fillOval(getDrawX(),getDrawY(),getWidth()-1,getHeight()-1);
 	//g.fillOval((int)x,(int)y,15,15);
 	materialDraw(g);
+	getSensor().draw(g);
     }
 
     //when hit

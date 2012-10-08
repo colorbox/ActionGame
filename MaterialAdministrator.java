@@ -44,8 +44,6 @@ public class MaterialAdministrator{
 	allDraw(g);
     }
 
-
-
     public void behaviorOperation(Controller controller,int Time){
 	//player
 	for(int i=0;i<MaterialsPlayer[0].size();i++){

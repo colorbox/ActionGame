@@ -1,3 +1,8 @@
+import java.util.*;
+import java.lang.Math;
+import java.awt.*;
+import java.applet.Applet;
+
 public class Enemy extends Character{
     /*
     //character's behavior
@@ -10,9 +15,9 @@ public class Enemy extends Character{
     public Enemy(double x,double y,double rad,double force){
 	super(x,y,rad,force,true);
 	setBehavior(new Behavior());
-	setWidth(4);
-	setHeight(4);
-	setGravityLimit(4);
+	setWidth(16);
+	setHeight(16);
+	setGravityLimit(14);
     }
 
     //API for Behavior
@@ -48,5 +53,19 @@ public class Enemy extends Character{
 	setHP(getHP()-Ballet.getDamage());
     }
 
+
+    public void draw(Graphics g){
+	g.setColor(Color.gray);
+
+	int pX,pY;
+	pX=(int)getDrawX();
+	pY=(int)getDrawY();
+	g.drawRect(pX,pY,getWidth(),getHeight());
+	g.drawRect(pX+1,pY+1,getWidth()-2,getHeight()-2);
+
+	materialDraw(g);
+	getSensor().draw(g);
+
+    }
 }
 

@@ -20,7 +20,7 @@ public class Character extends Material{
     public void deathOperation(){
 	if(getHP()<0){
 	    setVanish(true);
-	    System.out.println(getHP());
+	    System.out.println("dead with HP:"+getHP());
 	}
     }
 
