@@ -10,9 +10,7 @@ public class main extends Applet implements Runnable,KeyListener{
     Graphics gBuf;
     //イメージ
     Image imgBuf;
-
-
-
+    //スレッド
     Thread thread = null;
     //画面の大きさ
     Dimension AppletSize;

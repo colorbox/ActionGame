@@ -5,36 +5,38 @@ import java.awt.*;
 
 //Player属性とEnemy属性の物体を一元管理する。当たり判定が生じるのはPlayerとEnemy間のみなので、これでよいはず
 public class MaterialAdministrator{
-    //管理対象となる物体群、Character:0,Ballet:1,Player属性
-    private ArrayList[] MaterialsPlayer = {new ArrayList(),new ArrayList()};
-    //Enemy属性
-    private ArrayList[] MaterialsEnemy = {new ArrayList(),new ArrayList()};
+    //管理対象となる物体群
+    //Ballets,0:Player,1:Enemy
+    private MaterialManager[] Ballets = {new MaterialManager(),new MaterialManager()};
+    //Characters,0:Player,1:Enemy
+    private CharacterManager[] Characters = {new CharacterManager(),new CharacterManager()};
 
     //コンストラクタ
     public MaterialAdministrator(){}
 
     //キャラを追加
-    public void add(Character charactor){
+    public void add(Character character){
 	System.out.println("add Chara");
-	if(charactor.getIsEnemy()){
-	    MaterialsEnemy[0].add(charactor);
+	if(character.getIsEnemy()){
+	    Characters[1].add(character);
 	}else{
-	    MaterialsPlayer[0].add(charactor);
+	    Characters[0].add(character);
 	}
     }
+
     //弾を追加。
     public void add(Ballet ballet){
 	System.out.println("add Ballet");
 	if(ballet.getIsEnemy()){
-	    MaterialsEnemy[1].add(ballet);
+	    Ballets[1].add(ballet);
 	}else{
-	    MaterialsPlayer[1].add(ballet);
+	    Ballets[0].add(ballet);
 	}
     }
 
     //物体に関する全処理をこのメソッドで行う
     public void allOperation(Stage Stage,Graphics g,Controller controller,int Time){
-	checkCollision();
+	//checkCollision();
 	checkDeathAll();
 	checkVanish();
 	behaviorOperation(controller,Time);
@@ -44,109 +46,58 @@ public class MaterialAdministrator{
 	allDraw(g);
     }
 
-    public void behaviorOperation(Controller controller,int Time){
-	//player
-	for(int i=0;i<MaterialsPlayer[0].size();i++){
-	    Player player = (Player)MaterialsPlayer[0].get(i);
-	    player.getBehavior().playerMoveBehavior(controller,player,this);
-	}
-
-	//enemy
-	for(int i=0;i<MaterialsEnemy[0].size();i++){
-	    Enemy enemy = (Enemy)MaterialsEnemy[0].get(i);
-	    enemy.getBehavior().moveAndAttack(Time,enemy,this);
-	}
-    }
-
-    //物体リストに適用できる死亡フラグ調査
-    private void checkDeathPrim(ArrayList CharacterList){
-	for(int i=0;i<CharacterList.size();i++){
-	    Character Character = (Character)CharacterList.get(i);
-	    Character.deathOperation();
-	}
+    //振る舞い処理
+    public void behaviorOperation(Controller Controller,int Time){
+	//player behavior
+	Characters[0].behaviorOperationPlayer(Controller,Time,this);
+	//enemy behavior
+	Characters[1].behaviorOperationEnemy(Time,this);
     }
 
     //死亡フラグ調査
     public void checkDeathAll(){
-	checkDeathPrim(MaterialsEnemy[0]);
-	checkDeathPrim(MaterialsPlayer[0]);
-    }
-
-    //物体リストに適用できる削除
-    private void checkVanishPrim(ArrayList list){
-	for(int i=0;i<list.size();i++){
-	    Material material = (Material)list.get(i);
-	    if(material.isVanish()){
-		list.remove(i);
-	    }
+	for(int i=0;i<Characters.length;i++){
+	    Characters[i].checkDeath();
 	}
     }
 
     //物体リストから、消滅した物体を削除する
     public void checkVanish(){
 	for(int i=0;i<2;i++){
-	    checkVanishPrim(MaterialsEnemy[i]);
-	    checkVanishPrim(MaterialsPlayer[i]);
+	    Ballets[i].checkVanish();
+	    Characters[i].checkVanish();
 	}
     }
 
-    //物体リストに適用できる移動
-    private void allMovePrime(ArrayList Materials){
-	for(int i=0;i<Materials.size();i++){
-	    Material material = (Material)Materials.get(i);
-	    material.move();
-	}
-    }
     //移動
     public void allMove(){
 	for(int i=0;i<2;i++){
-	    allMovePrime(MaterialsEnemy[i]);
-	    allMovePrime(MaterialsPlayer[i]);
+	    Ballets[i].moveMaterial();
+	    Characters[i].moveMaterial();
 	}
     }
 
-    //物体リストに適用できる描写座標の移動
-    private void allDrawMovePrime(ArrayList Materials,int StageX,int StageY){
-	for(int i=0;i<Materials.size();i++){
-	    Material material = (Material)Materials.get(i);
-	    material.drawMove(StageX,StageY);
-	}
-    }
     //描写座標の移動
     public void allDrawMove(int StageX,int StageY){
 	for(int i=0;i<2;i++){
-	    allDrawMovePrime(MaterialsEnemy[i],StageX,StageY);
-	    allDrawMovePrime(MaterialsPlayer[i],StageX,StageY);
+	    Ballets[i].drawMove(StageX,StageY);
+	    Characters[i].drawMove(StageX,StageY);
 	}
     }
 
-    //物体リストに適用できる補正
-    private void allRevisionPrime(ArrayList Materials,Stage Stage){
-	for(int i=0;i<Materials.size();i++){
-	    Material material = (Material)Materials.get(i);
-	    material.moveRevision(Stage);
-	}
-    }
     //補正
     public void allRevision(Stage Stage){
 	for(int i=0;i<2;i++){
-	    allRevisionPrime(MaterialsEnemy[i],Stage);
-	    allRevisionPrime(MaterialsPlayer[i],Stage);
+	    Ballets[i].revisionPosition(Stage);
+	    Characters[i].revisionPosition(Stage);
 	}
     }
 
-    //物体リストに適用できる描写
-    private void allDrawPrime(ArrayList Materials,Graphics g){
-	for(int i=0;i<Materials.size();i++){
-	    Material material = (Material)Materials.get(i);
-	    material.draw(g);
-	}	
-    }
     //描写
     public void allDraw(Graphics g){
 	for(int i=0;i<2;i++){
-	    allDrawPrime(MaterialsEnemy[i],g);
-	    allDrawPrime(MaterialsPlayer[i],g);
+	    Ballets[i].draw(g);
+	    Characters[i].draw(g);
 	}
     }
 
@@ -185,6 +136,8 @@ public class MaterialAdministrator{
     private ArrayList[] MaterialsEnemy = {new ArrayList(),new ArrayList()};
      */
 
+
+    /*
     public void checkCollision(){
 	checkCollision_CharaChara(MaterialsEnemy[0],MaterialsPlayer[0]);
 	checkCollision_CharaBallet(MaterialsEnemy[0],MaterialsPlayer[1]);
@@ -192,7 +145,7 @@ public class MaterialAdministrator{
 	checkCollision_BalletBallet(MaterialsEnemy[1],MaterialsPlayer[1]);
     }
 
-    //ここから下はうんこ
+    //ここから下は各当たり判定処理
     public void checkCollision_CharaBallet(ArrayList Characters,ArrayList Ballets){
 	for(int i=0;i<Characters.size();i++){
 	    Character CharacterMaterial = (Character)Characters.get(i);
@@ -253,7 +206,7 @@ public class MaterialAdministrator{
 	    //test.getManyHitters();
 	}
     }
-
+    */
 
 
 }
