@@ -3,6 +3,7 @@ import java.applet.Applet;
 import java.util.Random;
 import java.awt.event.*;
 
+
 public class main extends Applet implements Runnable,KeyListener{
     //物体管理者
     MaterialAdministrator ma = new MaterialAdministrator();
