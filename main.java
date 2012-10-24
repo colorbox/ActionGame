@@ -18,7 +18,7 @@ public class main extends Applet implements Runnable,KeyListener{
     //自機
     Player Player;
     //コントローラー
-    Controller Controller =new Controller();
+    Controller Controller =new Controller(0);
     //タイマー
     Timer Timer = new Timer(0);
     //CSVReader
@@ -90,6 +90,7 @@ public class main extends Applet implements Runnable,KeyListener{
 		//0.016秒間(約1フレーム)スリープ。これを忘れるとハングアップする
 		Thread.sleep(17);
 		Timer.timePassing();
+		Controller.timeProceeding();
 	    }catch(InterruptedException e) {
 		e.printStackTrace();
 	    }
@@ -97,12 +98,12 @@ public class main extends Applet implements Runnable,KeyListener{
     }
 
     //オーバーライドして最低限のことだけをする
-    public void update(Graphics g){
-	paint(g);
+    public void update(Graphics AppletGraphic){
+	paint(AppletGraphic);
     }
-    public void paint(Graphics g){
+    public void paint(Graphics AppletGraphic){
 	//バッファを画面に
-	g.drawImage(imgBuf, 0, 0, this);
+	AppletGraphic.drawImage(imgBuf, 0, 0, this);
     }
 
     //アプレットが画面から消えると呼び出される
@@ -114,12 +115,12 @@ public class main extends Applet implements Runnable,KeyListener{
 
     //キー押下時
     public void keyPressed(KeyEvent e){
-	Controller.keyPressed(e,Timer.getTime());
+	Controller.keyPressed(e);
     }
 
     //キー離し
     public void keyReleased(KeyEvent e){
-	Controller.keyReleased(e,Timer.getTime());
+	Controller.keyReleased(e);
     }
 
     //keyTyped
