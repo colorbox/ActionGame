@@ -1,3 +1,5 @@
+import Controller.*;
+
 import java.util.*;
 import java.applet.Applet;
 import java.awt.*;

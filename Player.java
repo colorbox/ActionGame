@@ -69,7 +69,7 @@ public class Player extends Character{
 
     //弾発射
     public void launchMaterial(MaterialAdministrator ma){
-	ma.add(new Ballet(getX(),getY(),Cannon.getRad(),Cannon.getForce() ,false));
+	ma.add(new Ballet(getX(),getY(),Cannon.getRad(),Cannon.getForce()/2 ,false));
     }
 
     //移動

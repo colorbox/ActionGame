@@ -1,3 +1,5 @@
+import Controller.*;
+
 import java.util.*;
 import java.applet.Applet;
 import java.awt.*;
@@ -16,7 +18,7 @@ public class MaterialAdministrator{
 
     //キャラを追加
     public void add(Character character){
-	System.out.println("add Chara");
+	//System.out.println("add Chara");
 	if(character.getIsEnemy()){
 	    Characters[1].add(character);
 	}else{
@@ -26,7 +28,7 @@ public class MaterialAdministrator{
 
     //弾を追加。
     public void add(Ballet ballet){
-	System.out.println("add Ballet");
+	//System.out.println("add Ballet");
 	if(ballet.getIsEnemy()){
 	    Ballets[1].add(ballet);
 	}else{
@@ -42,6 +44,7 @@ public class MaterialAdministrator{
 	behaviorOperation(controller,Time);
 	allMove();
 	allRevision(Stage);
+	checkVanish();
 	allDrawMove(Stage.getX(),Stage.getY());
 	allDraw(g);
     }

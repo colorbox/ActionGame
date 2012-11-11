@@ -1,3 +1,4 @@
+import Controller.*;
 import java.awt.*;
 import java.applet.Applet;
 import java.util.Random;
@@ -18,13 +19,14 @@ public class main extends Applet implements Runnable,KeyListener{
     //自機
     Player Player;
     //コントローラー
-    Controller Controller =new Controller(0);
+    Controller Controller =new Controller();
     //タイマー
     Timer Timer = new Timer(0);
     //CSVReader
     CSVReader reader = new CSVReader("Data/Stage/testStage.csv");
     //load Stage
     Stage StageData=new Stage(reader.getStageData());
+
 
     //アプレットの初期化時呼び出される
     public void init(){
@@ -36,6 +38,7 @@ public class main extends Applet implements Runnable,KeyListener{
 	imgBuf = createImage(AppletSize.width, AppletSize.height);
 	//グラフィックコンテキスト取得
 	gBuf = imgBuf.getGraphics();
+
 
 	//Player init
 	Player = new Player(200.0,200.0,0.0,0.0,StageData.getStageWidth(),StageData.getStageHeight(),new PlayerBehavior());
@@ -83,14 +86,14 @@ public class main extends Applet implements Runnable,KeyListener{
 	    repaint();
 
 	    //コントローラーの値を全てリセット
-	    Controller.buttonReset();
+	    //Controller.resetButton();
 
 
 	    try{
 		//0.016秒間(約1フレーム)スリープ。これを忘れるとハングアップする
 		Thread.sleep(17);
 		Timer.timePassing();
-		Controller.timeProceeding();
+		Controller.incrementTime();
 	    }catch(InterruptedException e) {
 		e.printStackTrace();
 	    }

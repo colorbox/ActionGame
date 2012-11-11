@@ -1,5 +1,8 @@
 //具体的な動作は抽象概念を軸としてキャラクターのクラスにベタ書きする。それらを組み合わせるのがBehavior
 //Characterのクラスにベタ書きされるのは基本的な動作。Behaviorにはそれらの組み合わせを記述する。
+
+import Controller.*;
+
 public class Behavior{
     public Behavior(){}
 

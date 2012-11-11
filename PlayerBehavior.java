@@ -1,3 +1,5 @@
+import Controller.*;
+
 //どんな動きをするのかはPlayerに全て記述し、Behaviorはそれを呼び出す形で動作させる。PlayerのAPI的なものを作るという事ではなかろーか
 public class PlayerBehavior extends Behavior{
     //プレイヤーの振る舞い、移動時
@@ -5,7 +7,7 @@ public class PlayerBehavior extends Behavior{
 
     public void playerMoveBehavior(Controller Controller,Character Player,MaterialAdministrator ma){
 	//スティック操作
-	int stick = Controller.getStick();
+	int stick = Controller.getStickDirection();
 	//着地状態なら操作可能
 	if(Player.getLanding()){
 	    if(stick == 2){
@@ -27,7 +29,8 @@ public class PlayerBehavior extends Behavior{
 		Player.jumpForward();
 	    }
 	}
-	if(Controller.getZPress()){
+	System.out.println(Controller.isZPress());
+	if(Controller.isZPress()){
 	    //Characterだとattackメソッドに対応したものがないのでPlayerクラスにキャストする
 	    ((Player)Player).attack(ma);
 	}
