@@ -29,7 +29,6 @@ public class PlayerBehavior extends Behavior{
 		Player.jumpForward();
 	    }
 	}
-	System.out.println(Controller.isZPress());
 	if(Controller.isZPress()){
 	    //Characterだとattackメソッドに対応したものがないのでPlayerクラスにキャストする
 	    ((Player)Player).attack(ma);

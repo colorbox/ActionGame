@@ -85,9 +85,6 @@ public class main extends Applet implements Runnable,KeyListener{
 	    //画面の強制更新
 	    repaint();
 
-	    //コントローラーの値を全てリセット
-	    //Controller.resetButton();
-
 
 	    try{
 		//0.016秒間(約1フレーム)スリープ。これを忘れるとハングアップする
